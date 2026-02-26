@@ -223,27 +223,41 @@
         </p>
 
         <div class="form-container fade-in">
-            <form action="#" method="post">
-                <div class="form-group"><label for="name">お名前 <span class="required">必須</span></label><input type="text" id="name" name="name" placeholder="例：山田 太郎" required></div>
-                <div class="form-group"><label for="email">メールアドレス <span class="required">必須</span></label><input type="email" id="email" name="email" placeholder="例：info@vallhala.com" required></div>
+            <form action="ここに取得したURLを貼り付けます" method="POST">
+                
+                <div class="form-group">
+                    <label for="name">お名前 <span class="required">必須</span></label>
+                    <input type="text" id="name" name="name" placeholder="例：山田 太郎" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">メールアドレス <span class="required">必須</span></label>
+                    <input type="email" id="email" name="email" placeholder="例：info@vallhala.com" required>
+                </div>
+                
                 <div class="form-group">
                     <label for="subject">お問い合わせ種別</label>
                     <select id="subject" name="subject">
-                        <option value="ea">インジケータ・EAについて</option>
-                        <option value="ib">IBプログラム（無料配布）について</option>
-                        <option value="salon">会員制サロンについて</option>
-                        <option value="consulting">コンサルティングについて</option>
-                        <option value="other">その他</option>
+                        <option value="インジケータ・EAについて">インジケータ・EAについて</option>
+                        <option value="IBプログラムについて">IBプログラム（無料配布）について</option>
+                        <option value="会員制サロンについて">会員制サロンについて</option>
+                        <option value="コンサルティングについて">コンサルティングについて</option>
+                        <option value="その他">その他</option>
                     </select>
                 </div>
-                <div class="form-group"><label for="message">お問い合わせ内容 <span class="required">必須</span></label><textarea id="message" name="message" rows="5" placeholder="ご質問やご相談内容をご記入ください。" required></textarea></div>
+                
+                <div class="form-group">
+                    <label for="message">お問い合わせ内容 <span class="required">必須</span></label>
+                    <textarea id="message" name="message" rows="5" placeholder="ご質問やご相談内容をご記入ください。" required></textarea>
+                </div>
+                
                 <button type="submit" class="btn submit-btn">送信する</button>
             </form>
         </div>
 
         <div class="line-contact fade-in delay-1">
             <p>＼ LINEでもお気軽にご相談ください ／</p>
-            <a href="#" class="btn line-btn">公式LINEに登録してシステムを受け取る</a>
+            <a href="https://lin.ee/lOi6rtH" target="_blank" class="btn line-btn">公式LINEに登録してシステムを受け取る</a>
         </div>
     </section>
 
