@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRODUCTS | VALLHALA</title>
+    <style>
+        /* ====================================
+           基本設定・ヘッダー・フッター
+           ==================================== */
+        body { background-color: #121212; color: #ffffff; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+        header { background-color: #000000; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4af37; }
+        .logo { font-size: 28px; font-weight: bold; color: #d4af37; letter-spacing: 3px; }
+        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+        nav li { margin-left: 30px; }
+        nav a { color: #ffffff; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        nav a:hover { color: #d4af37; }
+        footer { background-color: #000000; padding: 40px 20px; text-align: center; border-top: 1px solid #333333; margin-top: 80px;}
+        footer a { color: #888888; text-decoration: none; margin: 0 15px; font-size: 14px; transition: 0.3s; display: inline-block; margin-bottom: 10px;}
+        footer a:hover { color: #d4af37; }
+        footer p { color: #555555; font-size: 12px; margin-top: 20px; }
+
+        .page-header { text-align: center; padding: 80px 20px 40px 20px; }
+        .page-header h1 { color: #d4af37; font-size: 32px; letter-spacing: 2px; }
+        .page-header p { color: #aaaaaa; font-size: 16px; margin-top: 10px; }
+
+        /* ====================================
+           商品一覧専用のデザイン
+           ==================================== */
+        .products-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 商品の横長カード（左に画像、右にテキスト） */
+        .product-row {
+            display: flex;
+            background-color: #1e1e1e;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            margin-bottom: 50px;
+            overflow: hidden; /* 角丸からはみ出た部分を隠す */
+            transition: 0.3s;
+        }
+        
+        /* マウスを乗せたら少し浮いて光る */
+        .product-row:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15);
+            border-color: #d4af37;
+        }
+
+        /* 画像エリア（左側） */
+        .product-image {
+            width: 45%;
+            background-color: #222222;
+            border-right: 1px solid #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777777;
+            position: relative;
+        }
+        /* もし画像(img)を入れたら枠いっぱいに広げる設定 */
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* テキストエリア（右側） */
+        .product-info {
+            width: 55%;
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .product-info h2 {
+            color: #d4af37;
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .product-info .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 20px;
+            display: inline-block;
+            background-color: #333;
+            padding: 5px 15px;
+            border-radius: 4px;
+        }
+        .product-info p {
+            color: #cccccc;
+            line-height: 1.8;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+        
+        /* 詳細・購入ボタン */
+        .btn-small {
+            display: inline-block;
+            background-color: #d4af37;
+            color: #000000;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: 0.3s;
+            text-align: center;
+            align-self: flex-start; /* ボタンを左寄せにする */
+        }
+        .btn-small:hover {
+            background-color: #fce28b;
+            transform: scale(1.05);
+        }
+
+        /* スマホ用デザイン（縦並びに変更） */
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 15px 20px; }
+            nav ul { margin-top: 15px; flex-wrap: wrap; justify-content: center; }
+            nav li { margin: 5px 10px; }
+            
+            .product-row { flex-direction: column; } /* 縦並びの魔法 */
+            .product-image, .product-info { width: 100%; }
+            .product-image { height: 250px; border-right: none; border-bottom: 1px solid #333333; }
+            .product-info { padding: 30px 20px; }
+        }
+
+        /* アニメーション */
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.show { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">VALLHALA</div>
+        <nav>
+            <ul>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="products.html" style="color: #d4af37;">Products</a></li>
+                <li><a href="index.html#results">Results</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header fade-in">
+        <h1>PRODUCTS</h1>
+        <p>VALLHALAが提供するシステム・サービス一覧</p>
+    </div>
+
+    <div class="products-container">
+        
+        <div class="product-row fade-in">
+            <div class="product-image">
+                [ ここにEAのイメージ画像 ]
+            </div>
+            <div class="product-info">
+                <h2>VALLHALA オリジナルEA「〇〇」</h2>
+                <span class="price">価格：お問い合わせ</span>
+                <p>長期間のバックテストとフォワードテストで優位性を証明した、当グループ最高峰の自動売買システムです。トレンド相場での爆発的な利益と、レンジ相場での徹底したリスク管理を両立しています。</p>
+                <a href="index.html#contact" class="btn-small">詳細のお問い合わせ</a>
+            </div>
+        </div>
+
+        <div class="product-row fade-in">
+            <div class="product-image">
+                [ ここに口座開設のイメージ画像 ]
+            </div>
+            <div class="product-info">
+                <h2>IB専用システム 無料配布プログラム</h2>
+                <span class="price">価格：無料（条件あり）</span>
+                <p>指定の証券会社にて口座を開設いただいた方を対象に、専用にチューニングされたインジケータおよびEAを無料でご提供いたします。初心者の方でもすぐにプロと同じ環境を構築可能です。</p>
+                <a href="#" class="btn-small">LINEで受け取る</a>
+            </div>
+        </div>
+
+        <div class="product-row fade-in">
+            <div class="product-image">
+                [ ここにサロン・コミュニティのイメージ画像 ]
+            </div>
+            <div class="product-info">
+                <h2>プレミアム会員制サロン</h2>
+                <span class="price">月額：〇〇,〇〇〇円</span>
+                <p>プロトレーダーによるリアルタイムの相場環境認識、シグナル配信、独自手法の解説動画などがすべて見放題のクローズドコミュニティです。熱量の高い仲間と共に、専業トレーダーを目指します。</p>
+                <a href="index.html#contact" class="btn-small">入会案内を見る</a>
+            </div>
+        </div>
+
+        <div class="product-row fade-in">
+            <div class="product-image">
+                [ ここにコンサルティングのイメージ画像 ]
+            </div>
+            <div class="product-info">
+                <h2>FXビジネス 構築コンサルティング</h2>
+                <span class="price">価格：カスタムお見積り</span>
+                <p>ご自身でEAやインジケータを開発したい方、または開発したシステムを販売・マーケティングして売上を上げたい方に向けた、マンツーマンのビジネスコンサルティングを提供します。</p>
+                <a href="index.html#contact" class="btn-small">無料相談を申し込む</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div>
+            <a href="index.html">トップページ</a>
+            <a href="law.html">特定商取引法に基づく表記</a>
+            <a href="disclaimer.html">免責事項</a>
+            <a href="terms.html">利用規約</a>
+            <a href="privacy.html">プライバシーポリシー</a>
+        </div>
+        <p>&copy; 2026 VALLHALA All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+        const hiddenElements = document.querySelectorAll('.fade-in');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
