@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALLHALA | FX事業グループ</title>
+    <style>
+        /* ====================================
+           基本設定・ヘッダー・ファーストビュー
+           ==================================== */
+        body { background-color: #121212; color: #ffffff; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+        header { background-color: #000000; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4af37; }
+        .logo { font-size: 28px; font-weight: bold; color: #d4af37; letter-spacing: 3px; }
+        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+        nav li { margin-left: 30px; }
+        nav a { color: #ffffff; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        nav a:hover { color: #d4af37; }
+        
+        .hero { text-align: center; padding: 150px 20px; background: linear-gradient(135deg, #1a1a2e 0%, #121212 100%); }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; color: #d4af37; }
+        .hero p { font-size: 18px; line-height: 1.8; color: #dddddd; }
+
+        /* ====================================
+           各セクション共通設定
+           ==================================== */
+        section { padding: 80px 20px; text-align: center; }
+        section h2 { font-size: 36px; color: #d4af37; margin-bottom: 40px; letter-spacing: 2px; }
+
+        /* ABOUT */
+        .about-text { font-size: 16px; line-height: 2; color: #cccccc; max-width: 800px; margin: 0 auto; }
+
+        /* SERVICES */
+        .service-cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .card { background-color: #1e1e1e; border: 1px solid #333333; border-top: 3px solid #d4af37; padding: 30px; width: 250px; text-align: left; transition: 0.3s; }
+        .card:hover { transform: translateY(-10px) !important; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2); }
+        .card h3 { color: #ffffff; font-size: 20px; margin-bottom: 15px; }
+        .card p { color: #aaaaaa; font-size: 14px; line-height: 1.6; }
+
+        /* RESULTS */
+        #results { background-color: #0a0a0a; border-top: 1px solid #222; border-bottom: 1px solid #222; }
+        .result-block { max-width: 900px; margin: 0 auto 60px auto; text-align: left; }
+        .result-block h3 { color: #ffffff; font-size: 24px; border-left: 5px solid #d4af37; padding-left: 15px; margin-bottom: 20px; }
+        .stats-container { display: flex; gap: 40px; margin-bottom: 30px; }
+        .stat-box { background-color: #1a1a1a; padding: 20px 30px; border-radius: 8px; text-align: center; width: 100%;}
+        .stat-number { font-size: 36px; font-weight: bold; color: #d4af37; display: block; }
+        .stat-label { font-size: 14px; color: #aaaaaa; }
+        .review-box { background-color: #1a1a1a; padding: 20px; border-radius: 8px; margin-bottom: 15px; font-style: italic; color: #dddddd; }
+        .review-name { display: block; text-align: right; font-size: 12px; color: #888888; margin-top: 10px; }
+
+        /* FLOW */
+        .flow-container { max-width: 800px; margin: 0 auto; text-align: left; }
+        .step { background-color: #1e1e1e; border-left: 4px solid #d4af37; padding: 25px 30px; margin-bottom: 20px; border-radius: 0 8px 8px 0; }
+        .step-num { color: #d4af37; font-weight: bold; font-size: 18px; margin-bottom: 10px; display: block; letter-spacing: 1px; }
+        .step h3 { color: #ffffff; font-size: 22px; margin-top: 0; margin-bottom: 15px; }
+        .step p { color: #cccccc; font-size: 15px; line-height: 1.6; margin: 0; }
+
+        /* CONTACT & FORM */
+        #contact { background: linear-gradient(135deg, #1a1a2e 0%, #121212 100%); border-top: 2px solid #d4af37; }
+        .cta-text { font-size: 18px; color: #dddddd; margin-bottom: 40px; line-height: 1.8; }
+        .btn { display: inline-block; background-color: #d4af37; color: #000000; padding: 20px 50px; font-size: 22px; font-weight: bold; text-decoration: none; border-radius: 50px; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); text-align: center;}
+        .btn:hover { background-color: #fce28b; transform: scale(1.05); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6); }
+
+        .form-container { max-width: 600px; margin: 0 auto 40px auto; background-color: #1e1e1e; padding: 40px; border-radius: 8px; border-top: 3px solid #d4af37; text-align: left; }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #dddddd; font-size: 14px; }
+        .required { background-color: #d4af37; color: #000; font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-left: 10px; font-weight: bold; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; background-color: #2a2a2a; border: 1px solid #444; color: #ffffff; border-radius: 4px; font-size: 16px; box-sizing: border-box; font-family: inherit; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #d4af37; }
+        .submit-btn { width: 100%; border: none; cursor: pointer; margin-top: 10px; }
+        
+        .line-contact { margin-top: 50px; padding-top: 40px; border-top: 1px dashed #333; }
+        .line-contact p { color: #d4af37; margin-bottom: 20px; font-weight: bold; }
+        .line-btn { background-color: #06c755; color: #ffffff; box-shadow: 0 5px 15px rgba(6, 199, 85, 0.3); font-size: 18px; padding: 15px 30px;}
+        .line-btn:hover { background-color: #05a044; box-shadow: 0 8px 20px rgba(6, 199, 85, 0.5); }
+
+        /* FOOTER */
+        footer { background-color: #000000; padding: 40px 20px; text-align: center; border-top: 1px solid #333333; }
+        footer a { color: #888888; text-decoration: none; margin: 0 15px; font-size: 14px; transition: 0.3s; display: inline-block; margin-bottom: 10px;}
+        footer a:hover { color: #d4af37; }
+        footer p { color: #555555; font-size: 12px; margin-top: 20px; }
+
+        /* ====================================
+           スマホ用デザイン（レスポンシブ）
+           ==================================== */
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 15px 20px; }
+            nav ul { margin-top: 15px; flex-wrap: wrap; justify-content: center; }
+            nav li { margin: 5px 10px; }
+            .hero { padding: 100px 20px; }
+            .hero h1 { font-size: 28px; }
+            .card { width: 100%; }
+            .stats-container { flex-direction: column; gap: 20px; }
+            .btn { font-size: 16px; padding: 15px 30px; }
+            .form-container { padding: 20px; }
+        }
+
+        /* ====================================
+           【今回追加】アニメーションの魔法（CSS）
+           ==================================== */
+        /*最初は下の方に隠して、透明にしておく設定*/
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        /* JSによって「show」が追加されたら、元の位置に戻って不透明になる！ */
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* サービスカードが順番にフワッと出るように、少しずつ遅らせる呪文 */
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.3s; }
+        .delay-3 { transition-delay: 0.5s; }
+        .delay-4 { transition-delay: 0.7s; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">VALLHALA</div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#results">Results</a></li>
+                <li><a href="#flow">Flow</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero fade-in">
+        <h1>相場を支配する、究極の領域へ。</h1>
+        <p>インジケータ開発・自動売買(EA)・コミュニティ運営を通じ、<br>あなたのFXトレードを次のステージへ導きます。</p>
+    </section>
+
+    <section id="about" class="fade-in">
+        <h2>ABOUT US</h2>
+        <p class="about-text">
+            VALLHALAは、FXトレードにおける圧倒的な優位性を追求するプロフェッショナル集団です。<br>
+            相場の本質を見極めた独自の分析と確かな開発力を武器に、<br>
+            初心者から上級者まで、すべてのトレーダーに真の価値を提供します。
+        </p>
+    </section>
+
+    <section id="services">
+        <h2 class="fade-in">SERVICES</h2>
+        <div class="service-cards">
+            <div class="card fade-in delay-1">
+                <h3>インジケータ・EA開発</h3>
+                <p>相場の環境認識からエントリー、決済までをロジック化。優位性の高いオリジナルインジケータや自動売買システム(EA)を独自開発しています。</p>
+            </div>
+            <div class="card fade-in delay-2">
+                <h3>IBプログラム (無料配布)</h3>
+                <p>指定のリンクから口座開設いただいた方に、私たちが開発した強力なシステムを無料でご提供。あなたのトレード環境を即座に構築します。</p>
+            </div>
+            <div class="card fade-in delay-3">
+                <h3>会員制サロン</h3>
+                <p>リアルタイムの相場分析、トレード手法の解説、シグナル配信などを行う限定コミュニティのサブスクリプションを運営しています。</p>
+            </div>
+            <div class="card fade-in delay-4">
+                <h3>コンサルティング</h3>
+                <p>システム開発の手法、効果的な販売戦略、熱量の高いコミュニティの運営方法まで、ビジネスを成功に導く実践的なコンサルティングを提供します。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="results">
+        <h2 class="fade-in">RESULTS & REVIEWS</h2>
+        <div class="result-block fade-in">
+            <h3>1. 圧倒的な販売実績とお客様の声</h3>
+            <div class="stats-container">
+                <div class="stat-box"><span class="stat-number">1,500+</span><span class="stat-label">システム累計販売・配布数</span></div>
+                <div class="stat-box"><span class="stat-number">98%</span><span class="stat-label">ユーザー満足度</span></div>
+            </div>
+            <div class="review-box">「今までいくつものEAを試してきましたが、VALLHALAのシステムは別格です。相場の急変時もしっかりリスク管理されており、安心して運用できています。」<span class="review-name">- 継続利用3ヶ月 30代男性</span></div>
+            <div class="review-box">「コンサルを受けてから、自分で開発したインジケータの売上が劇的に伸びました！マーケティングのノウハウも本物です。」<span class="review-name">- コンサル受講生 40代男性</span></div>
+        </div>
+        <div class="result-block fade-in">
+            <h3>2. 活況を呈する限定コミュニティ</h3>
+            <p style="color: #cccccc; line-height: 1.8; margin-bottom: 20px;">当グループが運営する会員制サロンやIB利用者限定コミュニティでは、日々活発な意見交換が行われています。専業トレーダーからの相場解説や、参加者同士の利益報告など、モチベーションを高め合える環境が整っています。</p>
+            <div class="image-placeholder" style="border: none; background: transparent; height: auto;">
+                <img src="community.png" alt="コミュニティの様子" style="width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+            </div>
+        </div>
+        <div class="result-block fade-in">
+            <h3>3. 確固たるシステム運用実績</h3>
+            <p style="color: #cccccc; line-height: 1.8; margin-bottom: 20px;">私たちが提供するEAやインジケータは、長期間のバックテストによる優位性の証明はもちろん、実際のフォワードテスト（リアル口座での運用）でも安定した成績を残しています。</p>
+            <div class="image-placeholder" style="border: none; background: transparent; height: auto;">
+                <img src="test.png" alt="バックテスト結果" style="width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+            </div>
+        </div>
+    </section>
+
+    <section id="flow">
+        <h2 class="fade-in">FLOW</h2>
+        <div class="flow-container">
+            <div class="step fade-in">
+                <span class="step-num">STEP 01</span>
+                <h3>公式LINEへのご登録</h3>
+                <p>まずは当サイト下部のボタンより、VALLHALA公式LINEへご登録ください。最新のシステム情報や限定のご案内をお届けします。</p>
+            </div>
+            <div class="step fade-in delay-1">
+                <span class="step-num">STEP 02</span>
+                <h3>指定リンクからの口座開設</h3>
+                <p>LINEにてご案内する指定の証券会社リンクより、FX口座の開設をお願いいたします。（※すでに口座をお持ちの方の手順もご案内しております）</p>
+            </div>
+            <div class="step fade-in delay-2">
+                <span class="step-num">STEP 03</span>
+                <h3>システムの受け取りと稼働</h3>
+                <p>口座開設が完了しましたら、LINEにてご連絡ください。確認後、専用のシステムファイルと詳しい設定マニュアルをお渡しいたします。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="fade-in">
+        <h2>CONTACT & JOIN</h2>
+        <p class="cta-text">
+            圧倒的な優位性を、あなたのトレード環境に。<br>
+            システムに関するご質問や、サロンへの参加希望は以下のフォーム、<br>または公式LINEよりお気軽にお問い合わせください。
+        </p>
+
+        <div class="form-container fade-in">
+            <form action="#" method="post">
+                <div class="form-group"><label for="name">お名前 <span class="required">必須</span></label><input type="text" id="name" name="name" placeholder="例：山田 太郎" required></div>
+                <div class="form-group"><label for="email">メールアドレス <span class="required">必須</span></label><input type="email" id="email" name="email" placeholder="例：info@vallhala.com" required></div>
+                <div class="form-group">
+                    <label for="subject">お問い合わせ種別</label>
+                    <select id="subject" name="subject">
+                        <option value="ea">インジケータ・EAについて</option>
+                        <option value="ib">IBプログラム（無料配布）について</option>
+                        <option value="salon">会員制サロンについて</option>
+                        <option value="consulting">コンサルティングについて</option>
+                        <option value="other">その他</option>
+                    </select>
+                </div>
+                <div class="form-group"><label for="message">お問い合わせ内容 <span class="required">必須</span></label><textarea id="message" name="message" rows="5" placeholder="ご質問やご相談内容をご記入ください。" required></textarea></div>
+                <button type="submit" class="btn submit-btn">送信する</button>
+            </form>
+        </div>
+
+        <div class="line-contact fade-in delay-1">
+            <p>＼ LINEでもお気軽にご相談ください ／</p>
+            <a href="#" class="btn line-btn">公式LINEに登録してシステムを受け取る</a>
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            <a href="#">運営者情報</a>
+            <a href="#">利用規約</a>
+            <a href="#">プライバシーポリシー</a>
+            <a href="law.html">特定商取引法に基づく表記</a>
+        </div>
+        <p>&copy; 2026 VALLHALA All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // 画面に要素が入ってきたかを監視する「オブザーバー（監視役）」を作ります
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                // 要素が画面に入ったら（isIntersecting）
+                if (entry.isIntersecting) {
+                    // その要素に 'show' というクラス（目印）を付けます
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+
+        // HTMLの中から 'fade-in' というクラスがついた要素を全部探し出して、監視役に登録します
+        const hiddenElements = document.querySelectorAll('.fade-in');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
