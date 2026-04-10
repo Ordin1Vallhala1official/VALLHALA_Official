@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>指定口座開設のご案内 | VALLHALA</title>
+    <style>
+        /* ====================================
+           基本設定・ヘッダー・フッター
+           ==================================== */
+        body { background-color: #0b1120; color: #ffffff; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+        header { background-color: #060913; padding: 20px 50px; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid #1a233a; }
+        .logo { font-size: 28px; font-weight: bold; color: #d4af37; letter-spacing: 3px; }
+        
+        footer { background-color: #060913; padding: 40px 20px; text-align: center; border-top: 1px solid #1a233a; margin-top: 80px;}
+        footer p { color: #475467; font-size: 12px; margin-top: 20px; }
+
+        /* ====================================
+           口座開設ページ専用デザイン
+           ==================================== */
+        .page-header { text-align: center; padding: 60px 20px 30px 20px; background: linear-gradient(180deg, #0b1120 0%, #111827 100%); }
+        .page-header h1 { color: #ffffff; font-size: 32px; letter-spacing: 2px; margin-bottom: 15px; }
+        .page-header h1 span { color: #d4af37; }
+        .page-header p { color: #9ca3af; font-size: 16px; margin: 0; line-height: 1.6;}
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+        /* 証券会社カード */
+        .broker-card { background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; overflow: hidden; margin-bottom: 40px; display: flex; flex-direction: column; }
+        
+        /* バナー画像エリア */
+        .broker-banner { width: 100%; background-color: #1a233a; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid #1f2937; }
+        .broker-banner img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+        
+        /* バナーを持っていない時用のプレースホルダー（画像を入れたら消してください） */
+        .banner-placeholder { padding: 80px 20px; color: #6b7280; font-size: 18px; text-align: center; border-bottom: 1px dashed #374151; width: 100%; box-sizing: border-box;}
+
+        .broker-content { padding: 40px; }
+        .broker-title { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid #1f2937; padding-bottom: 20px;}
+        .broker-title h2 { color: #ffffff; font-size: 28px; margin: 0; }
+        .broker-badge { background-color: rgba(212, 175, 55, 0.1); color: #d4af37; border: 1px solid #d4af37; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+
+        .broker-features { list-style: none; padding: 0; margin: 0 0 30px 0; }
+        .broker-features li { color: #d1d5db; margin-bottom: 12px; padding-left: 25px; position: relative; font-size: 15px; line-height: 1.6;}
+        .broker-features li::before { content: '✓'; color: #10b981; position: absolute; left: 0; font-weight: bold; font-size: 18px;}
+
+        /* 指定設定のボックス */
+        .spec-box { background-color: #060913; border-left: 4px solid #d4af37; padding: 20px; border-radius: 4px; margin-bottom: 30px; }
+        .spec-box h4 { color: #d4af37; margin-top: 0; margin-bottom: 15px; font-size: 16px; }
+        .spec-grid { display: flex; flex-wrap: wrap; gap: 15px; }
+        .spec-item { background-color: #111827; border: 1px solid #1f2937; padding: 10px 15px; border-radius: 4px; font-size: 14px; color: #ffffff; flex: 1; min-width: 150px; text-align: center;}
+        .spec-item span { display: block; color: #9ca3af; font-size: 12px; margin-bottom: 5px; }
+
+        /* CTAボタン */
+        .btn-open { display: block; background: linear-gradient(90deg, #d4af37 0%, #fce28b 100%); color: #000000; padding: 20px; font-size: 20px; font-weight: bold; text-decoration: none; border-radius: 50px; text-align: center; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2); }
+        .btn-open:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4); }
+
+        /* 次のステップ案内 */
+        .next-step-section { background-color: #111827; border: 2px solid #3b82f6; border-radius: 12px; padding: 40px; margin-top: 60px; margin-bottom: 60px; text-align: center; }
+        .next-step-section h3 { color: #3b82f6; font-size: 24px; margin-top: 0; margin-bottom: 20px; }
+        .next-step-section p { color: #d1d5db; font-size: 16px; line-height: 1.8; margin-bottom: 30px; }
+        .btn-line { display: inline-block; background-color: #06C755; color: #ffffff; padding: 15px 40px; font-size: 18px; font-weight: bold; text-decoration: none; border-radius: 50px; transition: 0.3s; }
+        .btn-line:hover { background-color: #05b34c; transform: translateY(-2px); }
+
+        /* スマホ対応 */
+        @media (max-width: 768px) {
+            .broker-content { padding: 25px; }
+            .broker-title { flex-direction: column; align-items: flex-start; }
+            .broker-badge { margin-top: 10px; }
+            .spec-grid { flex-direction: column; }
+        }
+
+        /* アニメーション */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in.show { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">VALLHALA</div>
+    </header>
+
+    <div class="page-header fade-in">
+        <h1>VALLHALA <span>指定口座開設</span></h1>
+        <p>システムを無料で受け取るためのSTEP 1です。<br>以下のいずれかの証券会社から、指定リンク経由で口座を開設してください。</p>
+    </div>
+
+    <div class="container">
+        
+        <div class="broker-card fade-in">
+            <div class="broker-banner">
+                <a href="https://clicks.affstrack.com/c?m=152911&amp;c=1197066" referrerpolicy="no-referrer-when-downgrade"><img src="https://ads.affstrack.com/i/152911?c=1197066" width="800" height="418" referrerpolicy="no-referrer-when-downgrade"/></a>
+            </div>
+            
+            <div class="broker-content">
+                <div class="broker-title">
+                    <h2>XMTrading</h2>
+                    <span class="broker-badge">定番・一番人気</span>
+                </div>
+                
+                <ul class="broker-features">
+                    <li>日本人トレーダー利用率No.1の圧倒的な信頼と実績</li>
+                    <li>新規口座開設ボーナス＆入金100%ボーナス対応</li>
+                    <li>約定力が非常に高く、システム稼働に最適な安定環境</li>
+                </ul>
+
+                <div class="spec-box">
+                    <h4>⚠️ 以下の指定内容で開設してください</h4>
+                    <div class="spec-grid">
+                        <div class="spec-item"><span>プラットフォーム</span>MT4</div>
+                        <div class="spec-item"><span>口座タイプ</span>Standard（スタンダード）</div>
+                        <div class="spec-item"><span>基本通貨</span>JPY（日本円）</div>
+                        <div class="spec-item"><span>レバレッジ</span>1:1000（最大）</div>
+                    </div>
+                </div>
+
+                <a href="https://affx.click/bWnc8" class="btn-open" target="_blank" rel="noopener noreferrer">
+                    XMTradingで口座を開設する
+                </a>
+            </div>
+        </div>
+
+        <div class="broker-card fade-in">
+            <div class="broker-banner">
+                <a href="https://banner-api.hfm.com/link/69d7aec6f14bf7e6728ab290?regulator=HFSV&refid=30517920" target="_blank" rel="noopener noreferrer">
+                    <img src="https://banner-api.hfm.com/banner/69d7aec6f14bf7e6728ab290?regulator=HFSV&refid=30517920" alt="HFM Banner" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                </a>
+            </div>
+            
+            <div class="broker-content">
+                <div class="broker-title">
+                    <h2>HF Markets (HFM)</h2>
+                    <span class="broker-badge">高レバレッジ・狭スプレッド</span>
+                </div>
+                
+                <ul class="broker-features">
+                    <li>最大レバレッジ2000倍で、少額からでも効率的な運用が可能</li>
+                    <li>業界トップクラスの狭いスプレッドで取引コストを削減</li>
+                    <li>豪華な入金ボーナスプログラムを常時開催</li>
+                </ul>
+
+                <div class="spec-box">
+                    <h4>⚠️ 以下の指定内容で開設してください</h4>
+                    <div class="spec-grid">
+                        <div class="spec-item"><span>プラットフォーム</span>MT4</div>
+                        <div class="spec-item"><span>口座タイプ</span>Premium（またはCent）</div>
+                        <div class="spec-item"><span>基本通貨</span>JPY（日本円）</div>
+                        <div class="spec-item"><span>レバレッジ</span>1:2000（最大）</div>
+                    </div>
+                    <p style="color: #9ca3af; font-size: 13px; margin-top: 15px; margin-bottom: 0;">※口座タイプ（Premium等）は、ご自身の配布したいEAの仕様に合わせて文言を書き換えてください。</p>
+                </div>
+
+                <a href="https://www.hfm.com/sv/jp/?refid=30517920" class="btn-open" target="_blank" rel="noopener noreferrer">
+                    HFMで口座を開設する
+                </a>
+            </div>
+        </div>
+
+        <div class="next-step-section fade-in">
+            <h3>口座開設が完了した方へ</h3>
+            <p>開設が完了しましたら、証券会社から発行された<strong>【MT4の口座番号（ログインID）】</strong>を、VALLHALAの公式LINEまでメッセージでお送りください。<br><br>API認証（口座の紐付け）が確認でき次第、<strong>システムのダウンロードURLと解凍パスワード</strong>を自動でお渡しいたします。</p>
+            
+            <a href="https://lin.ee/lOi6rtH" class="btn-line">
+                💬 公式LINEへ口座番号を送る
+            </a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p style="color: #6b7280; margin-bottom: 10px;">※本ページのリンク以外から開設された場合、システムの認証ができず配布できませんのでご注意ください。</p>
+        <p>&copy; 2026 VALLHALA All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+        const hiddenElements = document.querySelectorAll('.fade-in');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>

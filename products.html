@@ -178,6 +178,26 @@
             margin-bottom: 0;
         }
 
+        /* ====================================
+           EA選択ポップアップ（モーダル）専用CSS
+           ==================================== */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(5px); opacity: 0; transition: opacity 0.3s ease; }
+        .modal.show { display: flex; align-items: center; justify-content: center; opacity: 1; }
+        .modal-content { background-color: #111827; border: 1px solid #d4af37; border-radius: 12px; padding: 40px; width: 90%; max-width: 500px; position: relative; transform: translateY(-20px); transition: transform 0.3s ease; box-shadow: 0 10px 40px rgba(0,0,0,0.5);}
+        .modal.show .modal-content { transform: translateY(0); }
+        
+        .close-btn { color: #9ca3af; float: right; font-size: 28px; font-weight: bold; cursor: pointer; position: absolute; top: 15px; right: 20px; transition: 0.2s;}
+        .close-btn:hover { color: #d4af37; }
+        
+        .modal-title { color: #ffffff; font-size: 24px; margin-top: 0; margin-bottom: 10px; border-bottom: 2px solid #1f2937; padding-bottom: 10px;}
+        .modal-desc { color: #9ca3af; font-size: 14px; margin-bottom: 25px; }
+
+        .system-list { display: flex; flex-direction: column; gap: 15px; }
+        .system-item { background-color: #0b1120; border: 1px solid #1f2937; padding: 20px; border-radius: 8px; text-decoration: none; display: block; transition: 0.3s; border-left: 4px solid #374151;}
+        .system-item:hover { border-color: #d4af37; border-left-color: #d4af37; background-color: #1a233a; transform: translateX(5px);}
+        .system-name { display: block; color: #d4af37; font-size: 18px; font-weight: bold; margin-bottom: 5px; }
+        .system-info { display: block; color: #d1d5db; font-size: 13px; }
+
         /* スマホ用デザイン */
         @media (max-width: 768px) {
             header { flex-direction: column; padding: 15px 20px; }
@@ -188,6 +208,7 @@
             .product-image, .product-info { width: 100%; }
             .product-image { height: 250px; border-right: none; border-bottom: 1px solid #333333; }
             .product-info { padding: 30px 20px; }
+            .modal-content { padding: 30px 20px; }
         }
 
         /* アニメーション */
@@ -219,20 +240,20 @@
         
         <div class="product-row fade-in">
             <div class="product-image">
-            <img src="product-image.png" alt="最上位システム MIDAS">
-        </div>
+                <img src="product-image.png" alt="最上位システム MIDAS">
+            </div>
             <div class="product-info">
                 <h2>最上位システム MIDAS</h2>
                 <h3>激動の相場を生き抜く、堅牢なシステム群</h3>
                 <p>長期間のバックテストとフォワードテストで優位性を証明した、当グループ最高峰の自動売買システムおよびインジケータです。</p>
-                <a href="ea-detail.html" class="btn-small">システムの詳細・実績を見る</a>
+                <button class="btn-small open-modal-btn" style="border: none; cursor: pointer; font-family: inherit;">システムの詳細・実績を見る</button>
             </div>
         </div>
 
         <div class="product-row fade-in">
             <div class="product-image">
-        <img src="collaboration-image.png" alt="IB配布プログラム" style="width: 100%; height: 100%; object-fit: cover; max-height: 400px;">
-    </div>
+                <img src="collaboration-image.png" alt="IB配布プログラム" style="width: 100%; height: 100%; object-fit: cover; max-height: 400px;">
+            </div>
             <div class="product-info">
                 <h2>IB専用システム 無料配布プログラム</h2>
                 <h3>「感情」に殺される前に。プロの完全自動環境を、初期費用ゼロで。</h3>
@@ -243,7 +264,7 @@
                 <p>「本当に優位性のあるシステムなら、なぜ無料で配るのか？」当然の疑問です。<br>
                 理由は明確で、あなたが私たちのシステムを使ってトレードし、長く市場に残り続けてくれることで、証券会社から私たちにシステム開発費（取引手数料の一部）が継続して還元されるWin-Winの仕組みだからです。あなたが利益を追求し長く稼働させるほど、私たちも潤う。だからこそ、粗悪なツールを売り逃げする業者とは次元の違う「本物の環境」を提供します。</p>
                 
-                <a href="download-draupnir.html" class="btn-small">システムの詳細・実績を見る</a>
+                <button class="btn-small open-modal-btn" style="border: none; cursor: pointer; font-family: inherit;">システムの詳細・実績を見る</button>
                 
                 <div class="legal-notes">
                     <ul>
@@ -324,7 +345,29 @@
         <p>&copy; 2026 VALLHALA All Rights Reserved.</p>
     </footer>
 
+    <div id="systemModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="modal-title">システム一覧</h2>
+            <p class="modal-desc">詳細をご覧になりたいシステムを選択してください。</p>
+            
+            <div class="system-list">
+                <a href="ea-detail.html" class="system-item">
+                    <span class="system-name">👑 MIDAS</span>
+                    <span class="system-info">最上位システム / 堅牢な自動売買群</span>
+                </a>
+                
+                <a href="download-draupnir.html" class="system-item">
+                    <span class="system-name">🛡️ DRAUPNIR V</span>
+                    <span class="system-info">IB専用 無料配布 / MTF究極AIロジック</span>
+                </a>
+
+                </div>
+        </div>
+    </div>
+
     <script>
+        // フェードインアニメーション
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -334,6 +377,41 @@
         });
         const hiddenElements = document.querySelectorAll('.fade-in');
         hiddenElements.forEach((el) => observer.observe(el));
+
+        // モーダル（ポップアップ）の制御
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = document.getElementById("systemModal");
+            var btns = document.querySelectorAll(".open-modal-btn");
+            var span = document.querySelector(".close-btn");
+
+            // 全ての「詳細を見る」ボタンにクリックイベントを追加
+            btns.forEach(function(btn) {
+                btn.onclick = function() {
+                    modal.style.display = "flex";
+                    setTimeout(function() {
+                        modal.classList.add("show");
+                    }, 10);
+                }
+            });
+
+            // ×ボタンで閉じる
+            span.onclick = function() {
+                modal.classList.remove("show");
+                setTimeout(function() {
+                    modal.style.display = "none";
+                }, 300);
+            }
+
+            // モーダルの外側（黒い背景）をクリックしたら閉じる
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.classList.remove("show");
+                    setTimeout(function() {
+                        modal.style.display = "none";
+                    }, 300);
+                }
+            }
+        });
     </script>
 </body>
 </html>
