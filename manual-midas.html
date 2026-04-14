@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIDAS 完全解説＆導入マニュアル | VALHALLA</title>
+    <style>
+        /* ====================================
+           基本設定・ヘッダー・フッター
+           ==================================== */
+        body { background-color: #0b1120; color: #ffffff; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; line-height: 1.8; }
+        header { background-color: #060913; padding: 20px 50px; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid #1a233a; position: sticky; top: 0; z-index: 1000;}
+        .logo { font-size: 28px; font-weight: bold; color: #d4af37; letter-spacing: 3px; }
+        
+        /* ====================================
+           マニュアル本体のデザイン
+           ==================================== */
+        .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+
+        /* タイトルエリア */
+        .page-header { text-align: center; margin-bottom: 60px; }
+        .product-badge { background-color: rgba(212, 175, 55, 0.1); color: #d4af37; border: 1px solid #d4af37; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 15px; display: inline-block; letter-spacing: 1px; }
+        .page-header h1 { font-size: 36px; margin-bottom: 20px; letter-spacing: 2px; }
+        .page-header p { color: #9ca3af; font-size: 16px; margin: 0 auto; max-width: 700px; text-align: left; }
+
+        /* 各章（チャプター）のデザイン */
+        .chapter { background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 40px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .chapter-title { color: #d4af37; font-size: 24px; font-weight: bold; margin-top: 0; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid #1f2937; display: flex; align-items: center; gap: 15px;}
+        .chapter-title span { background-color: #d4af37; color: #000; padding: 2px 10px; border-radius: 4px; font-size: 16px; font-weight: bold;}
+
+        /* 見出しとテキスト */
+        h3 { color: #ffffff; font-size: 20px; margin-top: 40px; margin-bottom: 20px; border-left: 4px solid #d4af37; padding-left: 15px; }
+        h4 { color: #e5e7eb; font-size: 18px; margin-top: 30px; margin-bottom: 15px; }
+        p { color: #d1d5db; font-size: 15px; margin-bottom: 20px; }
+        strong { color: #ffffff; font-weight: bold; background: linear-gradient(transparent 70%, rgba(212, 175, 55, 0.4) 0%); }
+
+        /* リストデザイン */
+        ul { padding-left: 20px; margin-bottom: 25px; color: #d1d5db; }
+        li { margin-bottom: 10px; }
+        li strong { color: #d4af37; background: none; }
+
+        /* 手順（ステップ）デザイン */
+        .step-box { background-color: #0b1120; border-left: 4px solid #3b82f6; padding: 25px; border-radius: 0 8px 8px 0; margin-bottom: 25px; }
+        .step-title { color: #3b82f6; font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 15px; }
+        .step-box p:last-child { margin-bottom: 0; }
+
+        /* パラメーター解説の表（テーブル） */
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: #0b1120; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 15px; border: 1px solid #1f2937; text-align: left; font-size: 14px; }
+        th { background-color: #1a233a; color: #d4af37; font-weight: bold; width: 35%; }
+        td { color: #d1d5db; }
+
+        /* 警告・重要ボックス */
+        .alert-box { background-color: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 25px; margin: 30px 0; }
+        .alert-title { color: #ef4444; font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;}
+        .alert-box p { color: #fca5a5; margin: 0; }
+        
+        /* 推奨ボックス（グリーン） */
+        .recommend-box { background-color: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 20px; margin-bottom: 30px; }
+        .recommend-title { color: #10b981; margin-top: 0; margin-bottom: 10px; font-size: 16px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
+
+        /* 画像プレースホルダー */
+        .image-placeholder { background-color: #1a233a; border: 2px dashed #374151; border-radius: 8px; height: 300px; display: flex; justify-content: center; align-items: center; color: #6b7280; margin: 20px 0; font-size: 14px; }
+        .image-placeholder img { max-width: 100%; height: auto; border-radius: 8px; display: block; }
+
+        /* スマホ対応 */
+        @media (max-width: 768px) {
+            .chapter { padding: 25px 15px; }
+            .page-header h1 { font-size: 28px; }
+            th, td { padding: 10px; font-size: 13px; display: block; width: 100%; box-sizing: border-box; }
+            th { border-bottom: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">VALHALLA</div>
+    </header>
+
+    <div class="container">
+        
+        <div class="page-header">
+            <span class="product-badge">VALHALLA PREMIER SYSTEM</span>
+            <h1>MIDAS<br>完全解説 ＆ 導入マニュアル</h1>
+            <p>本マニュアルは、最新のGUI（操作パネル）と通知機能を搭載した「MIDAS EA」の公式運用ガイドです。EAの根幹となるロジックから、MT4への導入手順、全パラメーターの詳細、そして相場のリスクを管理しながら、継続的な利益を追求するための運用ルールまでを網羅しています。稼働前に必ずご一読ください。</p>
+        </div>
+
+        <div class="chapter">
+            <h2 class="chapter-title"><span>第1章</span> ロジックと搭載機能の解説</h2>
+            
+            <h3>📊 1. コアロジック：金銀の「統計的相関（ペアトレード）」</h3>
+            <p>MIDASは、歴史的に極めて強い相関関係（同じような値動きをする性質）を持つ<strong>「ゴールド（金）」と「シルバー（銀）」の価格比率</strong>に着目したクオンツ・ロジックを搭載しています。</p>
+            <p>通常は連動して動く金と銀ですが、突発的なニュースや投機的な動きによって、一時的にそのバランスが崩れる（乖離する）ことがあります。MIDASは、過去の価格データからこの乖離度合いを「Zスコア（統計的な異常値）」として数値化します。</p>
+            <p>「99%以上の確率であり得ない異常なズレ」を検知した瞬間に、<strong>「元の相関バランスに回帰しやすい」という統計的な性質（平均回帰）を狙って</strong>、ゴールドの逆張りエントリーを行います。</p>
+
+            <h3>🛡️ 2. 搭載されている主要機能</h3>
+            <ul>
+                <li><strong>トレンド・フィルター：</strong>大局のトレンド（200MA）を判定し、完全に逆行する無謀なエントリーやナンピンを防ぎます。</li>
+                <li><strong>乖離解消による建値決済：</strong>相関バランスが正常に戻った際、もし含み損を抱えていれば自動的にストップロスを「建値（微益）」に移動し、撤退を図ります。</li>
+                <li><strong>ナンピン機能：</strong>エントリー後に逆行した場合、一定の距離（pips）とトレンド条件を満たした時のみ、ロットを増やして救済ポジション（ナンピン）を持ちます。</li>
+                <li><strong>口座資金保護（プロテクター）：</strong>万が一、歴史的な大トレンドに巻き込まれて含み損が設定値（%）に達した場合、自動で全決済して「口座の全損」リスクを極限まで防ぎます。</li>
+                <li><strong>緊急GUIボタン：</strong>チャート上に「一括決済（Close All）」「最大含み損カット（Cut Worst）」ボタンを配置し、ワンクリックでの危機回避を可能にしています。</li>
+                <li><strong>Discord & プッシュ通知：</strong>エントリー、ナンピン、プロテクター発動時などの重要アクションをリアルタイムで通知します。</li>
+            </ul>
+        </div>
+
+        <div class="chapter">
+            <h2 class="chapter-title"><span>第2章</span> 必要な環境</h2>
+            
+            <ul>
+                <li><strong>推奨通貨ペア：</strong> XAUUSD（Gold / ゴールド）<br>
+                <span style="font-size: 13px; color: #9ca3af;">※EAを稼働させるチャートはXAUUSDのみでOKです。内部で自動的にシルバーの価格を参照します。</span></li>
+                <li><strong>必須条件：</strong> ご利用の証券会社（ブローカー）でシルバー（XAGUSDやSILVERなど）のチャートデータが配信されていること。</li>
+                <li><strong>推奨時間足：</strong> M5（5分足）</li>
+                <li><strong>最低推奨証拠金：</strong> 10万円（約1,000ドル）～　資金に余裕があるほど増加率も耐久力も上がります。</li>
+            </ul>
+        </div>
+
+        <div class="chapter">
+            <h2 class="chapter-title"><span>第3章</span> 導入から稼働へのマニュアル</h2>
+
+            <div class="step-box">
+                <h3 class="step-title">STEP 1：システムのダウンロードと解凍</h3>
+                <p>1. ダウンロード専用ページから「MIDAS」のZIPファイルをダウンロードします。<br>
+                2. ダウンロードしたZIPファイルをダブルクリック（または右クリックから展開）して解凍します。<br>
+                <strong style="color: #d4af37;">※解凍の際、パスワードの入力を求められます。公式LINEでお伝えした「MIDAS専用パスワード」を入力してフォルダを開いてください。</strong></p>
+            </div>
+
+            <div class="step-box">
+                <h3 class="step-title">STEP 2：EAとセットファイルの配置</h3>
+                <p>1. MT4の左上メニュー「ファイル」＞「データフォルダを開く」をクリック。<br>
+                2. <code>MQL4</code> フォルダを開き、解凍したシステム一式をそれぞれ以下の指定フォルダに保存（コピー＆ペースト）します。</p>
+                <ul style="margin-top: 10px; margin-bottom: 10px;">
+                    <li><strong>EA本体（.ex4ファイル）</strong> ➔ <code>Experts</code> フォルダへ入れる</li>
+                    <li><strong>セットファイル（.setファイル）</strong> ➔ <code>Presets</code> フォルダへ入れる</li>
+                </ul>
+                <p>3. MT4のナビゲーターウィンドウで「エキスパートアドバイザ」を右クリックし、「更新」を押します。</p>
+            </div>
+
+            <div class="step-box" style="border-left-color: #ef4444;">
+                <h3 class="step-title" style="color: #ef4444;">STEP 3：Webリクエスト（URL）の許可設定【重要】</h3>
+                <p>口座認証とDiscord通知を行うために、MT4に通信先のURLを許可させる必要があります。</p>
+                <p>1. MT4上部メニュー「ツール」＞「オプション」を開く。<br>
+                2. <strong>「エキスパートアドバイザ」</strong>タブを開く。<br>
+                3. <strong>「WebRequestを許可するURLリスト」</strong>にチェックを入れる。<br>
+                4. その下の空欄をダブルクリックし、以下の2つのURLを追加して「OK」を押す。</p>
+                <ul style="margin-top: 10px;">
+                    <li style="color: #60a5fa;">https://script.google.com （口座認証用）</li>
+                    <li style="color: #60a5fa;">https://discord.com （通知用）</li>
+                </ul>
+                <div class="image-placeholder">
+                    [ ここにWebRequest設定画面のスクショ画像を挿入 ]
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3 class="step-title">STEP 4：気配値の表示とチャートへの適用</h3>
+                <p>1. MT4の「気配値表示」ウィンドウを開き、<strong>シルバー（XAGUSD等）が表示されている状態</strong>にします。<br>
+                <span style="font-size: 13px; color: #9ca3af;">※リストにあるだけでOKですが、シルバーの価格がうまく読み込めず、エラーが出る場合はチャートを開いて再度EAをセットし直してください。</span><br>
+                2. XAUUSDの5分足（M5）チャートを開きます。<br>
+                3. ナンビゲーターから「MIDAS」をチャートにドラッグ＆ドロップします。<br>
+                4. 「全般」タブで<strong>「自動売買を許可する」「DLLの使用を許可する」</strong>にチェックを入れます。<br>
+                <strong style="color: #d4af37;">5. 【重要】「パラメーターの入力」タブを開き、「読み込み」ボタンから、STEP 2でPresetsフォルダに入れた「推奨セットファイル（.set）」を読み込んで「OK」を押します。</strong></p>
+                <p style="margin-top: 15px;">チャート左上にダッシュボードが表示され、<strong>「通知テストは成功です！」</strong>というメッセージが届けば稼働準備完了です。</p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2 class="chapter-title"><span>第4章</span> パラメーター完全解説</h2>
+
+            <div class="recommend-box">
+                <h4 class="recommend-title">💡 セットファイル（.set）のご利用を強く推奨します</h4>
+                <p style="color: #d1fae5; font-size: 14px; margin-bottom: 0;">システム本体に同梱されている<strong>「推奨セットファイル」</strong>には、長期間のバックテストとフォワードテストに基づいた最適なデフォルト設定がすでに保存されています。基本的にはセットファイルを読み込むだけで、以下のパラメーターを個別に変更することなく安全に運用を開始していただけます。<br>（※ご自身の資金に合わせて「Lot」や「RiskPercent」のみ調整してご使用ください）</p>
+            </div>
+
+            <h3>基本設定</h3>
+            <table>
+                <tr><th>MagicNumber (123456)</th><td>他のEAと注文を区別するための識別番号です。</td></tr>
+                <tr><th>Slippage (3.0)</th><td>注文時に許容する価格のズレ（pips）です。</td></tr>
+            </table>
+
+            <h3>ロット・資金管理</h3>
+            <table>
+                <tr><th>UseMoneyManagement (true)</th><td>trueで口座資金に合わせた複利運用、falseで固定ロット運用。</td></tr>
+                <tr><th>MM_Mode (0)</th><td>0（証拠金使用率ベース）を推奨します。</td></tr>
+                <tr><th>RiskPercent (3.5)</th><td>複利運用時のリスク割合（%）です。上げるほどロットが大きくなります。</td></tr>
+                <tr><th>FixedLotSize (0.05)</th><td>複利をfalseにした際の固定ロットです。</td></tr>
+                <tr><th>MaxLotSize (200.0)</th><td>1ポジションあたりの最大ロット制限です。</td></tr>
+            </table>
+
+            <h3>エントリー判断</h3>
+            <table>
+                <tr><th>EntryMode (0)</th><td>エントリーの厳しさです（0:厳格 〜 2:易しい）。</td></tr>
+                <tr><th>SilverSymbolInput (XAGUSD)</th><td>シルバーのシンボル名です。空欄でも自動検知されますが、ブローカー独自の記号（例: XAGUSD.pro）がある場合は手動で入力してください。</td></tr>
+                <tr><th>CalcPeriod (60)</th><td>乖離（Zスコア）を計算する過去のローソク足の本数です。</td></tr>
+                <tr><th>ZScoreThreshold (3.0)</th><td>エントリーの敷居となるZスコアです。3.0は超・堅実（低頻度）。取引回数を増やしたい場合は2.0〜1.5に下げます。</td></tr>
+                <tr><th>RegThresholdMultiplier (1.5)</th><td>ゴールド単体での価格行き過ぎを測るATR倍率です。</td></tr>
+                <tr><th>TrendMaPeriod (200)</th><td>トレンド判定に使う移動平均線（MA）の期間です。</td></tr>
+            </table>
+
+            <h3>決済・ナンピン設定</h3>
+            <table>
+                <tr><th>StopLossPips (0.0)</th><td>初期の固定ストップロス（pips）です。0の場合は設定しません。</td></tr>
+                <tr><th>StartTrailPips (300.0)</th><td>含み益が何pipsに達したらトレーリング（利益確保）を開始するかの設定です。</td></tr>
+                <tr><th>TrailDistance (150.0)</th><td>トレーリング開始後、現在価格から何pips離して追いかけるかの設定です。</td></tr>
+                <tr><th>IgnoreExitProfit (200.0)</th><td>乖離解消時に、すでにこのpips以上の利益が出ていれば建値決済をキャンセルし、利益を伸ばすモードに移行します。</td></tr>
+                <tr><th>NanpinDistance (4000.0)</th><td>次のナンピンを打つための最低限の距離（pips）です。※4000＝40ドル幅</td></tr>
+                <tr><th>NanpinMultiplier (1.2)</th><td>ナンピン時のロットを前回の何倍にするかの設定です。</td></tr>
+                <tr><th>MaxNanpinCount (12)</th><td>最大で何回までナンピンを許可するかの制限です。</td></tr>
+            </table>
+
+            <h3 style="color: #ef4444; border-left-color: #ef4444;">★ 口座資金保護 (破綻防止) 【超重要】</h3>
+            <table>
+                <tr><th>UseEquityProtector (true)</th><td>必ず true にしてください。相場の急変時に口座の全損を防ぐ命綱です。</td></tr>
+                <tr><th>MaxDrawdownPercent (45.0)</th><td>有効証拠金が口座残高に対して何%のマイナス（ドローダウン）に達したら、全ポジションを強制損切りして逃げるかの設定です。</td></tr>
+            </table>
+
+            <h3>安全機能</h3>
+            <table>
+                <tr><th>UseNewsFilter (true)</th><td>指定した時間帯での「新規エントリー」を停止するかどうか。</td></tr>
+                <tr><th>NoTradeStartTime (21:00)</th><td>新規取引を【停止】する開始時間（MT4サーバー時間）です。</td></tr>
+                <tr><th>NoTradeEndTime (23:59)</th><td>新規取引の【停止】を解除する時間（MT4サーバー時間）です。</td></tr>
+                <tr><th>UseWeekendExit (false)</th><td>週末に全ポジションを強制決済して持ち越しを防ぐ機能です。</td></tr>
+                <tr><th>WeekendExitDay (5)</th><td>強制決済する曜日（5＝金曜日）。</td></tr>
+                <tr><th>WeekendExitTime (22:00)</th><td>強制決済を実行する時間（MT4サーバー時間）。</td></tr>
+            </table>
+
+            <h3>フィルター設定 (RSI)</h3>
+            <table>
+                <tr><th>UseRsiFilter (true)</th><td>RSIによるダマシ回避フィルターを使用するかどうか。</td></tr>
+                <tr><th>RsiPeriod (14)</th><td>RSIの計算期間。</td></tr>
+                <tr><th>RsiUpperLevel (70.0)</th><td>買われすぎの基準ラインです。</td></tr>
+                <tr><th>RsiLowerLevel (30.0)</th><td>売られすぎの基準ラインです。</td></tr>
+            </table>
+
+            <h3>通知設定</h3>
+            <table>
+                <tr><th>UsePushNotify (false)</th><td>trueにするとスマホのMT4アプリへプッシュ通知を送ります。</td></tr>
+                <tr><th>UseDiscord (false)</th><td>trueにするとDiscordへ通知を送ります。</td></tr>
+                <tr><th>DiscordWebHook ("")</th><td>DiscordのWebhook URLを入力します。</td></tr>
+            </table>
+
+            <h3>表示設定</h3>
+            <table>
+                <tr><th>ShowDashboard (true)</th><td>チャート上にダッシュボード（情報パネル）を表示するかどうか。</td></tr>
+                <tr><th>DashboardCorner (0)</th><td>パネルの表示位置（0=左上, 1=右上...）</td></tr>
+                <tr><th>X (20) / Y (30)</th><td>パネル位置の微調整（ピクセル）です。</td></tr>
+            </table>
+
+            <div style="background-color: #0b1120; padding: 30px; border-radius: 8px; margin-top: 40px; border: 1px solid #1f2937; border-top: 3px solid #d4af37;">
+                <h4 style="color: #d4af37; font-weight: bold; margin-top: 0; font-size: 18px;">📱 通知機能を使用される方へ</h4>
+                
+                <p style="color: #ffffff; font-weight: bold; margin-top: 20px;">〇 スマホのMT4へプッシュ通知を送りたい方</p>
+                <p>スマホ版MT4アプリをお持ちでない方はアプリをインストールして、開設した口座でログインを完了させてください。<br>
+                PC版MT4の画面上部にある「ツール」→「オプション」→「通知機能」を開き、以下の二箇所にチェックを入れます。</p>
+                <ul style="margin-bottom: 15px;">
+                    <li style="color: #d1d5db;">☑ プッシュ通知機能を有効にする</li>
+                    <li style="color: #d1d5db;">☑ トレード処理を通知する</li>
+                </ul>
+                <p>さらに「Meta Quotes ID」欄に、ご自身のスマホ版MT4の「設定」→「チャットとメッセージ」を開き、画面下部にあるMeta Quotes IDを入力してください。その後、EAのパラメーターで <code>UsePushNotify</code> を true にしてください。</p>
+                
+                <p style="color: #ffffff; font-weight: bold; margin-top: 30px;">〇 Discordサーバーへ通知を送りたい方</p>
+                <p>PC、スマホにDiscordアプリをインストールし、ログインと認証を完了させてください。<span style="font-size: 13px; color: #9ca3af;">（※ウェブフックの作成はPC画面からのみ可能です）</span><br>
+                PC版MT4の画面上部にある「ツール」→「オプション」→「エキスパートアドバイザ」を開き、以下の二箇所にチェックが入っていることを確認してください。</p>
+                <ul style="margin-bottom: 15px;">
+                    <li style="color: #d1d5db;">☑ DLLの使用を許可する</li>
+                    <li style="color: #d1d5db;">☑ WebRequestを許可するURLリスト</li>
+                </ul>
+                <p>「WebRequestを許可するURLリスト」に <span style="font-family: monospace; color: #d4af37;">https://discord.com</span> が追加されていることを確認します。（※第3章 STEP3で設定済みです）<br>
+                次に、Discordで通知用のサーバー・チャンネルを作成し、「チャンネルの編集」→「連携サービス」→「ウェブフック」→「新しいウェブフック」を作成します。<br>
+                そのWebhook URLをコピーし、EAのパラメーター <code>DiscordWebHook</code> にペーストし、<code>UseDiscord</code> を true にしてください。</p>
+            </div>
+
+        <div class="chapter">
+            <h2 class="chapter-title"><span>第5章</span> 運用ルールと注意点</h2>
+            <p>このEAは10年間のバックテストに裏打ちされた強靭なロジックを持っていますが、FXにおいて「100%安全な完全放置」は存在しません。以下のルールを守ることで、破綻リスクを極限まで抑えることができます。</p>
+
+            <div class="alert-box">
+                <h4 class="alert-title">⚠️ 1. プロテクター（資金保護）は絶対に外さないこと</h4>
+                <p>相関ロジックの唯一の弱点は、「金だけが異常に買われ続け、銀がついてこない歴史的なマクロトレンド」が発生した時です（例：2020年のコロナショック前夜、2024年の歴史的高値更新など）。<br><br>
+                この時、プロテクターを外してナンピンだけで耐えようとすると、数年に一度の確率で口座が全損します。<strong>「ドローダウン40%〜50%で損切りして逃げる」</strong>設定にしておけば、残った資金で再起を図り、再び利益を追求する余力を残すことができます。</p>
+            </div>
+
+            <h3>2. 「NoTrade（取引停止）」時間の正しい使い方</h3>
+            <p>パラメーターの <code>NoTradeStartTime</code> と <code>EndTime</code> は、「稼働させる時間」ではなく<strong>「EAを休ませる時間」</strong>を設定する項目です。</p>
+            <p>日本時間の深夜〜早朝など、流動性が低くスプレッドが広がりやすい時間を意図的に回避したい場合は、この数値を調整してください（※設定はすべてMT4のサーバー時間で行うことに注意してください）。</p>
+
+            <h3>3. 年末年始・超特大イベント時の手動停止</h3>
+            <ul>
+                <li><strong>年末年始（12/24〜1/4頃）：</strong> 市場参加者が激減し、突発的なフラッシュクラッシュ（暴落）が起きやすいため、EAの自動売買ボタンをオフにすることを強く推奨します。</li>
+                <li><strong>歴史的イベント：</strong> 米大統領選挙や、地政学リスク（戦争等）の急激な悪化など、明らかに相場がパニックになることが事前に予想できる場合は、チャート左上の<strong>「Close All」</strong>ボタンでポジションを決済し、相場が落ち着くまで稼働を停止してください。</li>
+            </ul>
+        </div>
+ 
+        <p>これにて導入完了となります。ご不明点等ございましたら、お気軽にサポート窓口(ディスコード、公式ライン、公式メール)までご相談ください。</p>
+    </div>
+
+    <footer style="padding: 40px 20px; background-color: #060913; border-top: 1px solid #1a233a; margin-top: 60px;">
+        <div style="max-width: 800px; margin: 0 auto; text-align: left; background-color: #111827; padding: 20px; border-radius: 6px; border-left: 3px solid #6b7280; margin-bottom: 30px;">
+            <p style="color: #9ca3af; font-size: 14px; font-weight: bold; margin-top: 0;">【免責事項および投資に関するリスクについて】</p>
+            <p style="color: #6b7280; font-size: 12px; margin-bottom: 8px;">※本マニュアルで解説しているパラメーター設定や運用ルールは、システムの仕様を説明するためのものであり、将来の利益を保証するものではありません。</p>
+            <p style="color: #6b7280; font-size: 12px; margin-bottom: 8px;">※FX取引には元本割れや証拠金以上の損失を被るリスクが伴います。最終的な稼働の判断、ロット数の設定、稼働停止のタイミング等は、お客様ご自身の資金状況と許容リスクに基づき、自己責任において行ってください。</p>
+            <p style="color: #6b7280; font-size: 12px; margin-bottom: 0;">※お客様のPC環境、VPSの不具合、通信エラー、証券会社側のシステム障害等に起因する稼働停止や、それに伴ういかなる損失についても、開発元および当方は一切の責任を負いかねます。</p>
+        </div>
+        <p style="text-align: center; color: #475467; font-size: 12px; margin: 0;">&copy; 2026 VALHALLA All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
