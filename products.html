@@ -194,8 +194,19 @@
 
         .system-list { display: flex; flex-direction: column; gap: 15px; }
         .system-item { background-color: #0b1120; border: 1px solid #1f2937; padding: 20px; border-radius: 8px; text-decoration: none; display: block; transition: 0.3s; border-left: 4px solid #374151;}
-        .system-item:hover { border-color: #d4af37; border-left-color: #d4af37; background-color: #1a233a; transform: translateX(5px);}
-        .system-name { display: block; color: #d4af37; font-size: 18px; font-weight: bold; margin-bottom: 5px; }
+        .system-item:hover { background-color: #1a233a; transform: translateX(5px);}
+        
+        /* 各システムのブランドカラー設定 */
+        .system-item.item-midas:hover { border-color: #d4af37; border-left-color: #d4af37; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1); }
+        .system-item.item-draupnir:hover { border-color: #d4af37; border-left-color: #d4af37; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1); }
+        .system-item.item-gungnir:hover { border-color: #00f2fe; border-left-color: #00f2fe; box-shadow: 0 5px 15px rgba(0, 242, 254, 0.1); }
+        .system-item.item-aegis:hover { border-color: #3b82f6; border-left-color: #3b82f6; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1); }
+
+        .system-name { display: block; font-size: 18px; font-weight: bold; margin-bottom: 5px; }
+        .item-midas .system-name, .item-draupnir .system-name { color: #d4af37; }
+        .item-gungnir .system-name { color: #00f2fe; }
+        .item-aegis .system-name { color: #3b82f6; }
+
         .system-info { display: block; color: #d1d5db; font-size: 13px; }
 
         /* スマホ用デザイン */
@@ -352,17 +363,28 @@
             <p class="modal-desc">詳細をご覧になりたいシステムを選択してください。</p>
             
             <div class="system-list">
-                <a href="ea-detail.html" class="system-item">
+                
+                <a href="manual-midas.html" class="system-item item-midas">
                     <span class="system-name">👑 MIDAS</span>
-                    <span class="system-info">最上位システム</span>
+                    <span class="system-info">アノマリーEA（最上位システム）</span>
                 </a>
                 
-                <a href="download-draupnir.html" class="system-item">
-                    <span class="system-name">🛡️ DRAUPNIR V</span>
-                    <span class="system-info">VALHALLA メインシステム</span>
+                <a href="draupnir-lp.html" class="system-item item-draupnir">
+                    <span class="system-name">⚔️ DRAUPNIR</span>
+                    <span class="system-info">王道トレンド EA（メインシステム）</span>
                 </a>
 
-                </div>
+                <a href="gungnir-lp.html" class="system-item item-gungnir">
+                    <span class="system-name">🗡️ GUNGNIR</span>
+                    <span class="system-info">次世代シグナルツール（裁量システム）</span>
+                </a>
+
+                <a href="aegis-lp.html" class="system-item item-aegis">
+                    <span class="system-name">🛡️ AEGIS Pro</span>
+                    <span class="system-info">完全自動ポジション決済・管理システム（決済システム）</span>
+                </a>
+
+            </div>
         </div>
     </div>
 
