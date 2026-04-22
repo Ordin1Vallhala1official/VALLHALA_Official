@@ -4,28 +4,21 @@
     <meta name="robots" content="noindex, nofollow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>【完全版】DRAUPNIR 導入・稼働マニュアル | VALHALLA</title>
+    <title>DRAUPNIR 完全解説＆導入マニュアル | VALLHALA</title>
     <style>
-        /* ====================================
-           基本設定・ヘッダー・フッター
-           ==================================== */
-        body { background-color: #0b1120; color: #d1d5db; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; line-height: 1.8; }
-        header { background-color: #060913; padding: 20px 50px; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid #1a233a; }
-        .logo { font-size: 24px; font-weight: bold; color: #d4af37; letter-spacing: 2px; }
-        
-        footer { background-color: #060913; padding: 40px 20px; text-align: center; border-top: 1px solid #1a233a; margin-top: 80px;}
-        footer p { color: #475467; font-size: 12px; margin: 0; }
+        /* 基本設定 */
+        body { background-color: #0b1120; color: #ffffff; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; line-height: 1.8; }
+        header { background-color: #060913; padding: 20px 50px; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid #1a233a; position: sticky; top: 0; z-index: 1000;}
+        .logo { font-size: 28px; font-weight: bold; color: #d4af37; letter-spacing: 3px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
 
-        /* ====================================
-           マニュアル専用デザイン
-           ==================================== */
-        .manual-header { text-align: center; padding: 60px 20px 40px 20px; background: linear-gradient(180deg, #0b1120 0%, #111827 100%); border-bottom: 1px solid #1f2937;}
-        .manual-header h1 { color: #ffffff; font-size: 28px; margin-bottom: 10px; }
-        .manual-header h1 span { color: #d4af37; }
-        
-        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        /* タイトルエリア */
+        .page-header { text-align: center; margin-bottom: 60px; }
+        .product-badge { background-color: rgba(212, 175, 55, 0.1); color: #d4af37; border: 1px solid #d4af37; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 15px; display: inline-block; letter-spacing: 1px; }
+        .page-header h1 { font-size: 34px; margin-bottom: 20px; letter-spacing: 2px; line-height: 1.4;}
+        .page-header p { color: #9ca3af; font-size: 16px; margin: 0 auto; max-width: 700px; text-align: left; }
 
-        /* 目次（インデックス） */
+        /* 目次 (TOC) */
         .toc { background-color: #111827; border: 1px solid #1f2937; border-left: 4px solid #d4af37; padding: 25px; border-radius: 8px; margin-bottom: 50px; }
         .toc h3 { color: #ffffff; margin-top: 0; margin-bottom: 15px; font-size: 18px; }
         .toc ul { list-style: none; padding: 0; margin: 0; }
@@ -33,292 +26,179 @@
         .toc a { color: #9ca3af; text-decoration: none; transition: 0.2s; display: block; padding: 5px 0;}
         .toc a:hover { color: #d4af37; padding-left: 5px;}
 
-        /* セクション見出し */
-        .section-title { color: #ffffff; font-size: 24px; border-bottom: 2px solid #1f2937; padding-bottom: 10px; margin-top: 60px; margin-bottom: 30px; display: flex; align-items: center;}
-        .section-title .step-badge { background-color: #d4af37; color: #000; font-size: 14px; font-weight: bold; padding: 4px 10px; border-radius: 4px; margin-right: 15px; }
+        /* 各章デザイン */
+        .chapter { background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 40px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .chapter-title { color: #d4af37; font-size: 24px; font-weight: bold; margin-top: 0; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid #1f2937; display: flex; align-items: center; gap: 15px;}
+        .chapter-title span { background-color: #d4af37; color: #000; padding: 2px 10px; border-radius: 4px; font-size: 16px; font-weight: bold;}
 
-        /* テキストと強調 */
-        h4 { color: #d4af37; font-size: 18px; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px dashed #1f2937; padding-bottom: 5px;}
+        /* 見出し・テキスト */
+        h3 { color: #ffffff; font-size: 20px; margin-top: 40px; margin-bottom: 20px; border-left: 4px solid #d4af37; padding-left: 15px; }
+        h4 { color: #e5e7eb; font-size: 18px; margin-top: 30px; margin-bottom: 15px; }
+        p { color: #d1d5db; font-size: 15px; margin-bottom: 20px; }
+        ul { padding-left: 20px; margin-bottom: 25px; color: #d1d5db; }
+        li { margin-bottom: 10px; }
         .highlight { color: #ffffff; font-weight: bold; background-color: rgba(212, 175, 55, 0.1); padding: 2px 6px; border-radius: 3px;}
-        .warning { background-color: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 15px; color: #fca5a5; margin: 20px 0; font-size: 14px;}
-        .info-box { background-color: #111827; border: 1px solid #1f2937; border-left: 4px solid #3b82f6; padding: 15px; color: #9ca3af; margin: 20px 0; font-size: 14px;}
 
-        /* 画像プレースホルダー */
-        .manual-img { width: 100%; background-color: #1a233a; border: 1px dashed #374151; padding: 40px 20px; box-sizing: border-box; text-align: center; color: #6b7280; border-radius: 6px; margin: 20px 0; font-size: 14px; }
-        
-        /* パラメーター解説用 */
-        .param-desc { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #1a233a;}
-        .param-desc:last-child { border-bottom: none; }
-        .param-name { color: #ffffff; font-weight: bold; font-size: 16px; margin-right: 10px; display: inline-block;}
-        .param-star { color: #ef4444; font-weight: bold; }
+        /* テーブル（パラメーター） */
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: #0b1120; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 15px; border: 1px solid #1f2937; text-align: left; font-size: 14px; }
+        th { background-color: #1a233a; color: #d4af37; font-weight: bold; width: 35%; }
+        td { color: #d1d5db; }
+
+        /* ステップボックス */
+        .step-box { background-color: #0b1120; border-left: 4px solid #3b82f6; padding: 25px; border-radius: 0 8px 8px 0; margin-bottom: 25px; border-top: 1px solid #1f2937; border-right: 1px solid #1f2937; border-bottom: 1px solid #1f2937;}
+        .step-title { color: #3b82f6; font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 15px; }
+        .step-box p:last-child { margin-bottom: 0; }
+
+        /* ボックス類 */
+        .alert-box { background-color: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 25px; margin: 30px 0; }
+        .alert-title { color: #ef4444; font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 10px; }
+        .alert-box p { color: #fca5a5; margin: 0; }
 
         @media (max-width: 768px) {
-            .manual-header h1 { font-size: 22px; }
-            .section-title { font-size: 20px; flex-direction: column; align-items: flex-start; }
-            .section-title .step-badge { margin-bottom: 10px; }
+            .chapter { padding: 25px 15px; }
+            .page-header h1 { font-size: 26px; }
+            th, td { padding: 10px; font-size: 13px; display: block; width: 100%; box-sizing: border-box; }
+            th { border-bottom: none; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">VALHALLA</div>
+        <div class="logo">VALLHALA</div>
     </header>
-
-    <div class="manual-header">
-        <h1>👑 【完全版】DRAUPNIR 導入・稼働マニュアル</h1>
-        <p style="color: #9ca3af; margin-top: 10px;">次世代型EA『DRAUPNIR（ドラウプニル）』を安全かつ安定して稼働させるための手順書です。</p>
-    </div>
 
     <div class="container">
         
-        <p>この度は、次世代型EA『DRAUPNIR（ドラウプニル）』のお受け取り、誠にありがとうございます。本マニュアルでは、EAを安全かつ安定して稼働させるための「VPSの導入」から「MT4の設定」「EAのセットアップ」までをステップ・バイ・ステップで解説いたします。</p>
-        <p>初めての方でも、この手順通りに進めれば15分〜30分程度で稼働を開始できます。</p>
+        <div class="page-header">
+            <span class="product-badge">VALLHALA PREMIER SYSTEM</span>
+            <h1>👑 DRAUPNIR<br>完全解説 ＆ 導入マニュアル</h1>
+            <p>この度は、次世代型EA『DRAUPNIR（ドラウプニル）』のお受け取り、誠にありがとうございます。本マニュアルでは、システムの詳細なロジック解説やパラメーター設定、そして実際の稼働手順について解説いたします。</p>
+        </div>
 
         <div class="toc">
             <h3>📑 目次</h3>
             <ul>
-                <li><a href="#step1">▶ STEP 1：VPS（仮想デスクトップ）の導入 ※強く推奨</a></li>
-                <li><a href="#step2">▶ STEP 2：MT4のインストールとログイン</a></li>
-                <li><a href="#step3">▶ STEP 3：EAファイルとSetファイル（設定ファイル）の導入</a></li>
-                <li><a href="#step4">▶ STEP 4：【重要】MT4のEA稼働設定とAPI認証許可</a></li>
-                <li><a href="#step5">▶ STEP 5：チャートへのEA適用と稼働開始</a></li>
-                <li><a href="#step6">▶ STEP 6：稼働確認 ＆ Discordコミュニティへのご招待</a></li>
-                <li><a href="#feature">▶ DRAUPNIR 5つの最強システム（特徴と強み）</a></li>
-                <li><a href="#parameter">▶ パラメーター詳細設定ガイド</a></li>
-                <li><a href="#recommend">▶ 初心者向け：推奨稼働ステップ</a></li>
+                <li><a href="#ch1">▶ 第1章：ロジックと搭載機能（特徴と強み）</a></li>
+                <li><a href="#ch2">▶ 第2章：導入・稼働マニュアル（チャートへの適用）</a></li>
+                <li><a href="#ch3">▶ 第3章：パラメーター完全解説</a></li>
+                <li><a href="#ch4">▶ 第4章：推奨運用ルールと注意点</a></li>
             </ul>
         </div>
 
-        <h2 id="step1" class="section-title"><span class="step-badge">STEP 1</span>VPS（仮想デスクトップ）の導入 ※強く推奨</h2>
-        <p>EAは24時間相場を監視して自動売買を行うため、ご自身のパソコンではなく<span class="highlight">VPS（仮想サーバー）</span>での稼働を強く推奨いたします。（ご自宅のPCの電源が落ちたり、スリープ状態になるとEAも停止してしまうためです）。</p>
-        <p style="color: #d4af37; font-weight: bold;">☆PCをお持ちでない方でもVPSを使用することで、スマホのみで稼働ができます！</p>
-        
-        <h4>【代表的なおすすめVPSサービス】</h4>
-        <ul>
-            <li style="margin-bottom: 15px;">
-                <a href="https://px.a8.net/svt/ejp?a8mat=3TH5IK+87WGFM+4NIK+61C2Q" rel="nofollow noopener noreferrer" target="_blank" style="color: #d4af37; text-decoration: underline; font-weight: bold;">ABLENET（エイブルネット）</a>：FX自動売買の定番。通信が安定しています。
-                <img border="0" width="1" height="1" src="https://www11.a8.net/0.gif?a8mat=3TH5IK+87WGFM+4NIK+61C2Q" alt="" style="display:none;">
-            </li>
-            <li style="margin-bottom: 15px;">
-                <a href="https://px.a8.net/svt/ejp?a8mat=4B1ILJ+B5A6IA+50+5MLDQA" rel="nofollow noopener noreferrer" target="_blank" style="color: #d4af37; text-decoration: underline; font-weight: bold;">ConoHa for Windows Server</a>：初期設定が簡単で初心者向けです。
-                <img border="0" width="1" height="1" src="https://www18.a8.net/0.gif?a8mat=4B1ILJ+B5A6IA+50+5MLDQA" alt="" style="display:none;">
-            </li>
-            <li style="margin-bottom: 15px;">
-                <a href="https://px.a8.net/svt/ejp?a8mat=3TB5YV+B0IPO2+50+3N1I8Y" rel="nofollow noopener noreferrer" target="_blank" style="color: #d4af37; text-decoration: underline; font-weight: bold;">お名前.com デスクトップクラウド</a>：FX専用プランがあり安心です。
-                <img border="0" width="1" height="1" src="https://www10.a8.net/0.gif?a8mat=3TB5YV+B0IPO2+50+3N1I8Y" alt="" style="display:none;">
-            </li>
-            <li style="margin-bottom: 15px;">
-                <a href="https://my.hyonix.com/aff.php?aff=5471" rel="noopener noreferrer" target="_blank" style="color: #d4af37; text-decoration: underline; font-weight: bold;">Hyonix(ハイオニクス)</a>：海外のサービスですが安価で十分な容量が使用できます。
-            </li>
-        </ul>
-        <p>VPSを契約したら、提供元のマニュアルに従って「リモートデスクトップ接続」を行い、VPSのWindows画面を開いてください。以降の作業は、<strong>すべてVPSの画面上</strong>で行います。</p>
-
-        <h2 id="step2" class="section-title"><span class="step-badge">STEP 2</span>MT4のインストールとログイン</h2>
-        <h4>MT4のダウンロード</h4>
-        <p>開設していただいた証券会社のホームページから「MT4（MetaTrader 4）」のPC用インストールファイルをダウンロードし、VPS上にインストールしてください。</p>
-        
-        <h4>口座へのログイン</h4>
-        <p>MT4を起動すると「取引口座のログイン情報」を求められます。証券会社から送られてきた以下の情報を入力してログインします。</p>
-        <ul>
-            <li><strong>ログインID</strong> （口座番号）</li>
-            <li><strong>パスワード</strong></li>
-            <li><strong>サーバー名</strong> （※一文字でも違うとログインできませんのでご注意ください）</li>
-        </ul>
-        <p>右下の接続状況に「〇〇/〇〇 kb」と数値が表示されればログイン成功です。（「無効な口座」等の表示は失敗しています）</p>
-
-        <h2 id="step3" class="section-title"><span class="step-badge">STEP 3</span>EAファイルとSetファイル（設定ファイル）の導入</h2>
-        <p>お渡ししたダウンロードリンクから、EA本体（.ex4）と設定ファイル（.set）をVPS上に保存してください。</p>
-        <p>MT4の左上メニューから <span class="highlight">「ファイル」 ＞ 「データフォルダを開く」</span> をクリックします。</p>
-
-        <h4>EA本体の配置</h4>
-        <p>開いたフォルダの中から <span class="highlight">「MQL4」 ＞ 「Experts」</span> フォルダを開き、その中にダウンロードしたEAファイル（DRAUPNIR V 配布用.ex4）をコピー＆ペーストします。</p>
-
-        <h4>Setファイルの配置</h4>
-        <p>一つ上の階層（MQL4フォルダ）に戻り、今度は <span class="highlight">「Presets」</span> フォルダを開きます。その中に設定ファイル（DRAUPNIR V 推奨セット.set）をコピー＆ペーストします。</p>
-        <p>MT4に戻り、左側の「ナビゲーター」パネル内にある「エキスパートアドバイザ」の上で右クリックし、<span class="highlight">「更新」</span>を押します。リストに『DRAUPNIR V 配布用』が表示されれば導入成功です。</p>
-
-        <h2 id="step4" class="section-title"><span class="step-badge">STEP 4</span>【重要】MT4のEA稼働設定とAPI認証許可</h2>
-        <div class="warning">
-            DRAUPNIRは高度な認証システム（VALHALLA Web API）を搭載しているため以下の設定が<strong>必須</strong>となります。
-        </div>
-        <p>MT4上部のメニューから <span class="highlight">「ツール」 ＞ 「オプション」</span> を開きます。「エキスパートアドバイザ」タブを開き、以下の2箇所にチェックを入れます。</p>
-        <ul>
-            <li>☑ 自動売買を許可する</li>
-            <li>☑ WebRequestを許可するURLリスト</li>
-        </ul>
-        <p>「WebRequestを許可するURLリスト」のすぐ下にある「+（新しいURLを追加）」をダブルクリックし、以下のURLをコピー＆ペーストして入力します。</p>
-        <p style="background-color: #111827; padding: 10px; border-radius: 4px; font-family: monospace; color: #d4af37;">認証システム用： https://script.googleusercontent.com/</p>
-        <p>入力できたら「OK」ボタンを押して画面を閉じます。また、MT4の上部ツールバーにある<strong>「自動売買」ボタンが緑色（ON）</strong>になっていることを確認してください。赤色（OFF）の場合はクリックして緑色にします。</p>
-
-        <div class="manual-img">
-            [画像: MT4のオプショントブとURL追加画面]
-        </div>
-
-        <h2 id="step5" class="section-title"><span class="step-badge">STEP 5</span>チャートへのEA適用と稼働開始</h2>
-        <h4>チャートの準備</h4>
-        <p>指定の通貨ペア（☆推奨通貨ペア: USDJPY, GBPJPY, GOLD）のチャートを開きます。チャート上部の時間足ボタンから、必ず <span class="highlight">「M5（5分足）」</span> を選択してください。（DRAUPNIRは5分足専用に設計されています）</p>
-
-        <h4>EAの適用</h4>
-        <p>左側のナビゲーターパネルから『DRAUPNIR V 配布用』を、開いたチャート上にドラッグ＆ドロップします。</p>
-
-        <h4>設定（Setファイル）の読み込み</h4>
-        <p>設定画面が開きます。「全般」タブを開き、「自動売買を許可する」にチェックが入っているか確認します。</p>
-        <p><strong>「パラメーターの入力」</strong>タブを開き、右下の <span class="highlight">「読み込み」</span> ボタンを押します。STEP 3で保存した <strong>DRAUPNIR V 推奨セット.set</strong> ファイルを選択し「開く」を押します。パラメーターが一括で推奨設定に変更されます。「OK」を押して設定画面を閉じます。</p>
-
-        <h2 id="step6" class="section-title"><span class="step-badge">STEP 6</span>稼働確認 ＆ Discordコミュニティへのご招待</h2>
-        <p>設定が完了すると、以下の2点で正常稼働が確認できます。</p>
-        <ul>
-            <li>チャートの右上に <span class="highlight">ニコちゃんマーク（スマイル😊）</span> が表示されていること。</li>
-            <li>チャートの左上に <span class="highlight">「■ DRAUPNIR v2.70」の操作パネル</span> が表示されていること。</li>
-        </ul>
-        <p style="font-size: 14px; color: #9ca3af;">（※認証に成功すると、MT4下部の「エキスパート」タブに「VALHALLA DRAUPNIR: 口座認証に成功しました。」と表示されます。エラーが出る場合は、STEP 4のURL設定や口座番号をご確認ください。）</p>
-
-        <div class="info-box">
-            <strong>【稼働が確認できた方へ：次のステップ】</strong><br>
-            無事にニコちゃんマークとパネルが表示され、稼働が確認できましたら、サポートLINE（またはメール）まで<strong>「稼働開始しました！」と、MT4の画面スクリーンショットを添えてご連絡ください。</strong><br><br>
-            確認後、開発者やユーザー同士で情報交換ができる<strong>【専用Discordサーバーへの招待リンク】</strong>をお送りいたします！皆様の利益最大化に向けたサポートや、最新相場状況の共有などを行っておりますので、ぜひご参加ください。
-        </div>
-
-        <hr style="border: 0; border-top: 1px solid #1f2937; margin: 60px 0;">
-
-        <div style="text-align: center; margin-bottom: 40px;">
-            <h2 style="color: #d4af37; font-size: 28px; margin-bottom: 10px;">👑 DRAUPNIR v2.70 ユーザーマニュアル</h2>
-            <p>システムの詳細ロジックとパラメーターの完全解説です。</p>
-        </div>
-
-        <h2 id="feature" class="section-title">■ 1. はじめに：DRAUPNIR（ドラウプニル）とは？</h2>
-        <p>本EAは、相場のボラティリティ（変動幅）に自動追従する次世代AIロジックと、複数のテクニカル根拠を点数化する「スコアリング・システム」を搭載したリスク管理特化型EAです。</p>
-        <p>巷に溢れる「逆行したらただナンピンするだけのEA」とは異なり、レンジ相場を自動で回避し、強いトレンドが発生した時のみ「ピラミッティング（増し玉）」による追撃で利益の最大化を追求します。あなたの口座資金を徹底的に守り抜きながら、相場の波を乗りこなすスマートな資産運用を実現します。</p>
-        <p style="color: #ef4444; font-size: 14px;">※本システムは<strong>【VALHALLA Web API 認証システム】</strong>により保護されています。ご登録いただいた口座でのみ稼働する限定システムとなります。</p>
-
-        <h2 class="section-title">■ 2. DRAUPNIR 5つの最強システム（特徴と強み）</h2>
-        <ul>
-            <li><strong>レンジ相場回避 ＆ トレンド爆益ブースト機能</strong><br>相場が方向感のない「レンジ（揉み合い）」の時は、無駄なエントリーを自動でストップして損失を防ぎます。逆に、強いトレンドが発生したことを検知すると、一時的にエントリー基準を緩和し、初期ロットを増幅（Lot Boost）させて一気に利益を刈り取ります。</li>
-            <li><strong>スコアリング・エントリーシステム</strong><br>「すべての条件が揃うまで待つ」のではなく、フィボナッチ到達、ローソク足の反発形状（プライスアクション）、オシレーターの状態などを「配点化」。合格ラインを超えたポイントでのみ高精度な狙撃を行います。</li>
-            <li><strong>鉄壁の守り：スマート・ナンピン</strong><br>含み損を抱えた場合でも、単なる値幅でナンピンはしません。「〇分以上経過」かつ「ローソク足の明確な反発サイン」が出た瞬間にのみ追加ポジションを持つため、急落・急騰相場での口座破綻リスクを極限まで抑えています。</li>
-            <li><strong>最大の攻め：ピラミッティング（順行追撃）</strong><br>予想通りに利益が乗っている強いトレンド相場では、利益を担保に「増し玉（ピラミッティング）」を行い、1回のトレンドで得られる利益を何倍にも膨らませます。</li>
-            <li><strong>完全自動の資金管理＆パーセンテージ決済</strong><br>複利機能をONにすれば、口座資金に合わせてロットを自動計算。さらに、複数ポジションを持った際は「現在の口座資金の〇%」という割合でトレイリング決済を行うため、ほったらかしでも常に最適な利益を確定し続けます。スワップポイント負けを防ぐ「最大保有日数決済」も備えた万全の設計です。</li>
-        </ul>
-
-        <h2 id="parameter" class="section-title">■ 3. パラメーター詳細設定ガイド</h2>
-        <p>ご自身の運用スタイルや資金量に合わせて設定を変更できます。<br>※<span class="param-star">（★）</span>マークの項目は、特にご確認いただきたい重要パラメーターです。</p>
-
-        <h4>⚙️ メインロジック設定</h4>
-        <p>相場環境の認識と、エントリーの土台となる設定です。</p>
-        <div class="param-desc"><span class="param-name">TradeDirection</span> 取引方向の制限です。「0=両方稼働」「1=買いのみ」「2=売りのみ」。相場の大局に合わせて片側だけ稼働させたい場合に変更します。</div>
-        <div class="param-desc"><span class="param-name">HigherTF</span> 上位足（大局のトレンド）を判断する時間足です。デフォルトの240は「4時間足」を意味します。</div>
-        <div class="param-desc"><span class="param-name">HTF_FastMA / HTF_SlowMA</span> 上位足のトレンドを測るための移動平均線（短期・長期）の設定値です。</div>
-        <div class="param-desc"><span class="param-name">LTF_MAPeriod</span> 現在のチャート（5分足）の移動平均線の設定値です。</div>
-        <div class="param-desc"><span class="param-name">FiboLookback</span> 過去何本分のローソク足から最高値・最安値を割り出し、フィボナッチを引くかを決めます。</div>
-        <div class="param-desc"><span class="param-name">TargetFiboMode</span> 狙う押し目・戻り目の深さ（38.2%、50.0%、61.8%）を7つのパターンから選択します。</div>
-        <div class="param-desc"><span class="param-name">FiboLevel1 / 2 / 3</span> フィボナッチの各ラインの数値です（基本的に変更不要です）。</div>
-
-        <h4>🎯 【スコアリング】エントリー基準設定</h4>
-        <p>DRAUPNIRの最大の特徴である、複数の根拠を点数化してエントリーする機能です。</p>
-        <div class="param-desc"><span class="param-name">EntryThreshold <span class="param-star">★</span></span> エントリーを実行する合格ライン（点数）です。この数値を下げると手数が激増し、上げるとエントリーが厳選されます。</div>
-        <div class="param-desc"><span class="param-name">Score_Fibo / PA / RSI / BB</span> 各条件（フィボナッチ到達、プライスアクション、RSI、ボリンジャーバンド）を満たした時に加算される配点です。</div>
-
-        <h4>🔥 トレンド爆益ブースト設定</h4>
-        <p>強いトレンドが発生した際に、利益を効率的に獲得するためのリミッター解除機能です。</p>
-        <div class="param-desc"><span class="param-name">UseDynamicThreshold</span> トレンド発生時にエントリー基準を緩和（点数を下げる）するかどうか。</div>
-        <div class="param-desc"><span class="param-name">RelaxADXLevel</span> この数値以上にトレンドが強くなった時（ADX値）に基準を緩和します。</div>
-        <div class="param-desc"><span class="param-name">RelaxedThreshold</span> 緩和時の新しいエントリー合格ラインです。</div>
-        <div class="param-desc"><span class="param-name">UseTrendLotBoost</span> トレンド時に初期ロットを大きくするかどうか。</div>
-        <div class="param-desc"><span class="param-name">BoostADXLevel / LotBoostMultiplier</span> ADXがこの数値を超えたら、ロットを「何倍」に増幅させるかの設定です。</div>
-
-        <h4>🛡️ レンジ相場回避フィルター</h4>
-        <p>方向感のない相場（レンジ）での無駄な負けを減らすための盾です。</p>
-        <div class="param-desc"><span class="param-name">UseRangeFilter <span class="param-star">★</span></span> レンジ回避機能を使用するかどうか。</div>
-        <div class="param-desc"><span class="param-name">ADX_Period</span> トレンドの強さを測るインジケーター（ADX）の計算期間です。</div>
-        <div class="param-desc"><span class="param-name">ADX_MinLevel</span> 最低限必要なトレンドの強さです。これ未満の時はエントリーをお休みします。</div>
-        <div class="param-desc"><span class="param-name">MA_MinDist_ATR</span> 上位足の短期MAと長期MAが近すぎる（絡み合っている＝レンジ）時にエントリーを回避します。</div>
-
-        <h4>📏 ATR（ボラティリティ自動追従）設定</h4>
-        <div class="param-desc"><span class="param-name">ATR_Period</span> ボラティリティを計算する期間です。</div>
-        <div class="param-desc"><span class="param-name">ToleranceATR_Mul</span> ラインでの反発を判定する際の「許容誤差（どれくらいピッタリタッチを求めるか）」です。</div>
-
-        <h4>📊 オシレーター・レジサポ設定</h4>
-        <div class="param-desc"><span class="param-name">UseRSI / UseBB</span> エントリー条件としてRSIやボリンジャーバンドの反発を含めるかどうかのON/OFFです。</div>
-        <div class="param-desc"><span class="param-name">RSI_BuyLevel / RSI_SellLevel</span> RSIの売られすぎ・買われすぎの基準値です。</div>
-        <div class="param-desc"><span class="param-name">UseSR_Confluence</span> 過去のレジスタンス・サポートライン（水平線）との重なりを根拠に含めるかどうかのON/OFFです。</div>
-
-        <h4>💰 エントリー・ロット管理設定</h4>
-        <div class="param-desc"><span class="param-name">InitialLot</span> 複利運用をOFFにした場合の固定ロット数です。</div>
-        <div class="param-desc"><span class="param-name">MagicNumber</span> EAを識別するためのマジックナンバーです。他のEAと同時に動かす場合は被らないように変更してください。</div>
-        <div class="param-desc"><span class="param-name">UseCompound <span class="param-star">★</span></span> 口座資金に合わせてロットを自動計算する「複利運用」のON/OFFです。</div>
-        <div class="param-desc"><span class="param-name">RiskPercent <span class="param-star">★</span></span> 複利運用時、口座資金の何％のリスクを取るかの設定です（0.04〜0.08推奨）。</div>
-        <div class="param-desc"><span class="param-name">UseCocomo</span> 負けた次のトレードでロットを上げるココモ法のON/OFFです（通常はfalse推奨）。</div>
-
-        <h4>⚔️ スマートナンピン設定(逆行時の守り)</h4>
-        <div class="param-desc"><span class="param-name">UseNanpin</span> ナンピン機能のON/OFFです。</div>
-        <div class="param-desc"><span class="param-name">Nanpin_ATR_Mul</span> ナンピンを開始する距離です。相場が荒れている時は自動で幅が広がります。</div>
-        <div class="param-desc"><span class="param-name">NanpinMultiplier</span> ナンピン時のロット増加倍率です。</div>
-        <div class="param-desc"><span class="param-name">MaxNanpin</span> 最大何回までナンピンを許可するかの設定です。</div>
-        <div class="param-desc"><span class="param-name">UseSmartNanpin</span> 指定距離まで落ちてもすぐには買わず、「反発のサイン（ローソク足の形）」が出るまで待つ賢いナンピンのON/OFFです。</div>
-        <div class="param-desc"><span class="param-name">NanpinMinMinutes</span> 次のナンピンを行うまでの最低待機時間です。一気に撃ち尽くすのを防ぎます。</div>
-
-        <h4>🚀 ピラミッティング設定(順行追撃)</h4>
-        <div class="param-desc"><span class="param-name">UsePyramiding <span class="param-star">★</span></span> 利益が乗っている方向に「増し玉（追撃）」を行う機能のON/OFFです。</div>
-        <div class="param-desc"><span class="param-name">Pyramid_ATR_Mul</span> 追撃を行う利益幅です。</div>
-        <div class="param-desc"><span class="param-name">PyramidMultiplier</span> 追撃時のロット倍率です。</div>
-        <div class="param-desc"><span class="param-name">MaxPyramid</span> 最大何回まで追撃を許可するかの設定です。</div>
-
-        <h4>🧺 動的バスケット決済設定 (超重要)</h4>
-        <div class="param-desc"><span class="param-name">UseBasketClose</span> トータル利益での一括決済（バスケット決済）のON/OFFです。</div>
-        <div class="param-desc"><span class="param-name">BasketTargetPct</span> 口座資金の何％の利益が出たら一括決済するかの目標値です（例: 1.0なら資金の1%で利確）。</div>
-        <div class="param-desc"><span class="param-name">UseBasketTrailing</span> 一括決済にトレイリングストップ（利益を伸ばす機能）を使うかどうかの設定です。</div>
-        <div class="param-desc"><span class="param-name">UseFailsafeSL <span class="param-star">★</span> / FailsafeLossPercent <span class="param-star">★</span></span> 口座を守る【最終防衛ライン】です。口座資金の指定％の含み損を抱えたら、全決済して強制的に逃げます。</div>
-
-        <h4>⏳ スワップ対策(タイムリミット)</h4>
-        <div class="param-desc"><span class="param-name">UseMaxHoldDays <span class="param-star">★</span> / MaxHoldDays <span class="param-star">★</span></span> ポジションを長期間保有し、マイナススワップ（日々の利息支払い）で資金が削られるのを防ぐため、指定した日数が経過したら強制決済します。</div>
-
-        <h4>🔄 トレンド転換・フィルター設定</h4>
-        <div class="param-desc"><span class="param-name">UseTrendClose</span> 上位足のトレンドが「買い」から「売り」に変わった等、大局が逆転した際に、傷が浅いうちに損切りして逃げる機能です。</div>
-        <div class="param-desc"><span class="param-name">UseLTFTrendConf</span> 下位足のMAがクロスしたことを確認してからエントリーする安全機能です。</div>
-        <div class="param-desc"><span class="param-name">UsePanicFilter</span> フラッシュクラッシュのような異常な暴落・暴騰時に、エントリーを一時停止して身を守ります。</div>
-        <div class="param-desc"><span class="param-name">UseTimeFilter / UseNewsFilter</span> 指定した時間帯や、特定の時間（指標発表時など）に取引を停止する機能です。</div>
-
-        <h4>📱 通知設定</h4>
-        <div class="param-desc"><span class="param-name">UsePushNotify</span> スマホのMT4アプリへプッシュ通知を送ります。</div>
-        <div class="param-desc"><span class="param-name">UseDiscord / DiscordWebHook</span> Discordの指定チャンネルへ取引通知を送るための設定です。</div>
-        
-        <div style="background-color: #111827; padding: 20px; border-radius: 8px; margin-top: 20px;">
-            <p style="color: #d4af37; font-weight: bold; margin-top: 0;">☆通知機能を使用されるかたへ</p>
-            <p><strong>〇スマホのMT4へプッシュ通知を送りたい方</strong><br>スマホ版MT4アプリをお持ちでない方はアプリをインストールして、開設した口座でログインを完了させてください。<br>MT4の画面上部にある ツール → オプション → 通知機能 を開き、以下の二箇所にチェックを入れます。</p>
-            <ul>
-                <li>☑ プッシュ通知機能を有効にする</li>
-                <li>☑ トレード処理を通知する</li>
-            </ul>
-            <p>さらに「Meta Quotes ID」欄にご自身のスマホ版MT4の 設定 → チャットとメッセージ を開き画面下部にあるMeta Quotes IDを入力してください。その後、パラメータで UsePushNotify をtrueにしてください。</p>
+        <div id="ch1" class="chapter">
+            <h2 class="chapter-title"><span>第1章</span> ロジックと搭載機能（特徴と強み）</h2>
+            <p>本EAは、相場のボラティリティに自動追従する次世代AIロジックと、複数のテクニカル根拠を点数化する「スコアリング・システム」を搭載したリスク管理特化型EAです。</p>
+            <p>巷に溢れる「逆行したらただナンピンするだけのEA」とは異なり、レンジ相場を自動で回避し、強いトレンドが発生した時のみ「ピラミッティング（増し玉）」による追撃で利益の最大化を追求します。</p>
             
-            <p style="margin-top: 20px;"><strong>〇ディスコードサーバーへの通知を送りたい方</strong><br>PC、スマホにディスコードアプリをインストールし、ログインと認証を完了させてください。※ウェブフックの作成はPC画面のみで可能です。<br>MT4の画面上部にある ツール → オプション → エキスパートアドバイザ を開き、以下の二箇所にチェックが入ってることを確認して下さい。</p>
             <ul>
-                <li>☑ DLLの使用を許可する</li>
-                <li>☑ WebRequestを許可するURLリスト</li>
+                <li><strong>レンジ相場回避 ＆ トレンド爆益ブースト機能：</strong> 相場が「レンジ（揉み合い）」の時は無駄なエントリーをストップ。強いトレンド発生時は初期ロットを増幅（Lot Boost）させて一気に利益を刈り取ります。</li>
+                <li><strong>スコアリング・エントリーシステム：</strong> フィボナッチ、プライスアクション、オシレーターの状態などを「配点化」。合格ラインを超えたポイントでのみ高精度な狙撃を行います。</li>
+                <li><strong>鉄壁の守り（スマート・ナンピン）：</strong> 単なる値幅でナンピンせず、「反発のサイン」が出た瞬間にのみ追加ポジションを持つため、急変相場での破綻リスクを極限まで抑えます。</li>
+                <li><strong>最大の攻め（ピラミッティング）：</strong> 利益が乗っている強いトレンド相場では、「増し玉」を行い1回のトレンドで得られる利益を何倍にも膨らませます。</li>
+                <li><strong>完全自動の資金管理＆パーセンテージ決済：</strong> 口座資金に合わせてロットを自動計算。さらに「現在の口座資金の〇%」という割合でトレイリング決済を行います。</li>
             </ul>
-            <p>「WebRequestを許可するURLリスト」に <span style="font-family: monospace; color: #d4af37;">https://discord.com</span> を追加してOKをクリックします。<br>次に、ディスコードで任意のサーバー・チャンネルを作成し、チャンネルの編集 → 連携サービス → ウェブフック → 新しいウェブフック を作成。そのURLをコピーし、パラメータの DiscordWebHook にペーストし、UseDiscord を true にします。</p>
         </div>
 
+        <div id="ch2" class="chapter">
+            <h2 class="chapter-title"><span>第2章</span> 導入・稼働マニュアル</h2>
+            
+            <div style="background-color: #0f172a; border: 1px solid #d4af37; border-left: 5px solid #d4af37; padding: 25px; border-radius: 8px; margin-bottom: 30px;">
+                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 15px; font-size: 18px;">⚠️ 必ずお読みください：共通の初期設定について</h4>
+                <p style="color: #cbd5e1; margin-bottom: 20px;">初めて稼働させる方は、システムをチャートに入れる前に<strong>「VPSの準備」「MT4の通信許可（DLL・Webリクエスト）」「通知設定」「ファイルの配置」</strong>を行う必要があります。<br>
+                まだ設定が完了していない方は、必ず以下の共通マニュアルを先に完了させてください。</p>
+                <a href="manual-setup.html" target="_blank" style="display: inline-block; background-color: #d4af37; color: #000; padding: 12px 25px; text-decoration: none; font-weight: bold; border-radius: 50px; transition: 0.3s;">
+                    ➡ 【全システム共通】導入・初期設定マニュアルを見る
+                </a>
+            </div>
 
-        <h2 id="recommend" class="section-title">■ 4. 初心者向け：推奨稼働ステップ</h2>
-        <ul>
-            <li><strong>まずは同梱のセットファイルの設定（デフォルト）で稼働開始</strong><br>本EAはデフォルト状態で「攻守のバランス」が最も最適化されるよう設計されています。まずは同梱のセットファイルを読み込んで稼働させてみてください。</li>
-            <li><strong>【安全重視の方】</strong><br><span class="highlight">UseFailsafeSL</span> を true に変更し、万が一の相場急変時に資金の大部分を守る設定（デフォルトは資金の10%でカット）にすることをお勧めします。</li>
-            <li><strong>【トレンド特化の方】</strong><br>もしご自身で「今は完全な上昇/下降トレンドだ」と判断できる場合は、<span class="highlight">TradeDirection</span> を DIR_LONG_ONLY /SHORT_ONLY （買いのみ/売りのみ）に設定し、逆張りのリスクをゼロにして稼働させる使い方も非常に強力です。</li>
-        </ul>
-        <p>これにて導入完了となります。ご不明点等ございましたら、お気軽にサポート窓口(ディスコード、公式ライン、公式メール)までご相談ください。</p>
+            <div class="step-box">
+                <h3 class="step-title">STEP 1：チャートへの適用と設定</h3>
+                <p style="color: #9ca3af; font-size: 13px; margin-bottom: 15px;">※共通の初期設定が完了していることを前提とした手順です。</p>
+                <ol style="padding-left: 20px; color: #cbd5e1; margin-bottom: 0;">
+                    <li style="margin-bottom: 10px;">MT4の気配値表示から、指定通貨ペア（USDJPY, GBPJPY, GOLD等）のチャートを開きます。</li>
+                    <li style="margin-bottom: 10px;">チャートの時間足を必ず <span class="highlight">「M5（5分足）」</span> に設定します。</li>
+                    <li style="margin-bottom: 10px;">ナビゲーターウィンドウから『DRAUPNIR』をチャートにドラッグ＆ドロップします。</li>
+                    <li style="margin-bottom: 10px;">設定画面の「全般」タブで<strong>「自動売買を許可する」「DLLの使用を許可する」</strong>にチェックを入れます。</li>
+                    <li style="margin-bottom: 10px;"><strong>【重要】</strong>「パラメーターの入力」タブを開き、「読み込み」ボタンからPresetsフォルダに入れた「DRAUPNIR V 推奨セット.set」を読み込んで「OK」を押します。</li>
+                </ol>
+            </div>
 
-        <div class="warning" style="margin-top: 60px;">
-            <strong>【投資に関する免責事項および注意事項】</strong><br>
-            本マニュアルで解説しているパラメーター設定や稼働手順は、システムの仕様を説明するためのものであり、将来の利益を保証するものではありません。当システム（DRAUPNIR）は過去のデータに基づき検証されたロジックを搭載しておりますが、FX取引には元本割れや証拠金以上の損失を被るリスクが伴います。<br><br>
-            ご案内している推奨設定（リスク%等）はあくまで目安であり、最終的なロット数や稼働・停止の判断は、お客様ご自身の資金状況と許容リスクに基づき、自己責任において行ってください。お客様のPC環境、VPSの不具合、通信エラー、証券会社側のシステム障害等に起因する稼働停止や、それに伴ういかなる損失についても、開発元および配布元は一切の責任を負いかねます。
+            <div class="step-box" style="border-left-color: #10b981; margin-bottom: 0;">
+                <h3 class="step-title" style="color: #10b981;">STEP 2：稼働確認</h3>
+                <p style="margin-bottom: 0;">チャート右上にニコちゃんマークが微笑み、左上に「操作パネル」が表示されれば成功です。スマホやDiscordに「テスト通知」が届けば、設定はすべて完了です！</p>
+            </div>
+        </div>
+
+        <div id="ch3" class="chapter">
+            <h2 class="chapter-title"><span>第3章</span> パラメーター完全解説</h2>
+            <p>※<strong style="color: #ef4444; background: none;">（★）</strong>マークの項目は、特にご確認いただきたい重要パラメーターです。</p>
+
+            <h3>⚙️ メインロジック設定</h3>
+            <table>
+                <tr><th>TradeDirection</th><td>取引方向の制限です。「0=両方稼働」「1=買いのみ」「2=売りのみ」。</td></tr>
+                <tr><th>HigherTF / MA設定</th><td>上位足（大局のトレンド）を判断する時間足とMAの設定値です。</td></tr>
+                <tr><th>TargetFiboMode</th><td>狙う押し目・戻り目の深さをパターンから選択します。</td></tr>
+            </table>
+
+            <h3>🎯 エントリー基準・ブースト設定</h3>
+            <table>
+                <tr><th>EntryThreshold <strong style="color: #ef4444; background: none;">★</strong></th><td>エントリーを実行する合格ライン（点数）です。下げると手数が激増します。</td></tr>
+                <tr><th>Score_〇〇</th><td>各条件（Fibo、PA等）を満たした時に加算される配点です。</td></tr>
+                <tr><th>UseTrendLotBoost</th><td>強いトレンド時に初期ロットを増幅させる機能です。</td></tr>
+            </table>
+
+            <h3>🛡️ 回避フィルター・ATR設定</h3>
+            <table>
+                <tr><th>UseRangeFilter <strong style="color: #ef4444; background: none;">★</strong></th><td>方向感のないレンジ相場での無駄な負けを減らすための盾です。</td></tr>
+                <tr><th>ADX_MinLevel</th><td>最低限必要なトレンドの強さです。これ未満の時はエントリーをお休みします。</td></tr>
+                <tr><th>ToleranceATR_Mul</th><td>ラインでの反発を判定する際の「許容誤差」です。</td></tr>
+            </table>
+
+            <h3>💰 エントリー・ロット管理設定</h3>
+            <table>
+                <tr><th>InitialLot</th><td>複利運用をOFFにした場合の固定ロット数です。</td></tr>
+                <tr><th>MagicNumber</th><td>他のEAと区別するための識別番号です。</td></tr>
+                <tr><th>UseCompound <strong style="color: #ef4444; background: none;">★</strong></th><td>口座資金に合わせてロットを自動計算する「複利運用」のON/OFFです。</td></tr>
+                <tr><th>RiskPercent <strong style="color: #ef4444; background: none;">★</strong></th><td>複利運用時、口座資金の何％のリスクを取るかの設定です（0.04〜0.08推奨）。</td></tr>
+            </table>
+
+            <h3>⚔️ スマートナンピン＆ピラミッティング設定</h3>
+            <table>
+                <tr><th>UseNanpin</th><td>逆行時にポジションを追加するナンピン機能のON/OFFです。</td></tr>
+                <tr><th>UseSmartNanpin</th><td>反発サインが出るまで待つ「賢いナンピン」機能です。</td></tr>
+                <tr><th>UsePyramiding <strong style="color: #ef4444; background: none;">★</strong></th><td>利益が乗っている方向に「増し玉（追撃）」を行う機能のON/OFFです。</td></tr>
+            </table>
+
+            <h3 style="color: #ef4444; border-left-color: #ef4444;">★ 決済・資金保護設定 【超重要】</h3>
+            <table>
+                <tr><th>UseBasketClose</th><td>トータル利益での一括決済（バスケット決済）のON/OFFです。</td></tr>
+                <tr><th>BasketTargetPct</th><td>口座資金の何％の利益が出たら一括決済するかの目標値です。</td></tr>
+                <tr><th>UseFailsafeSL <strong style="color: #ef4444; background: none;">★</strong></th><td>資金の指定％の含み損を抱えたら、全決済して強制的に逃げる「最終防衛ライン」です。</td></tr>
+                <tr><th>UseMaxHoldDays <strong style="color: #ef4444; background: none;">★</strong></th><td>マイナススワップを防ぐため、指定日数が経過したら強制決済します。</td></tr>
+            </table>
+        </div>
+
+        <div id="ch4" class="chapter">
+            <h2 class="chapter-title"><span>第4章</span> 推奨運用ルールと注意点</h2>
+            
+            <ul>
+                <li><strong>まずは同梱のセットファイルの設定（デフォルト）で稼働開始：</strong><br>本EAはデフォルト状態で「攻守のバランス」が最も最適化されるよう設計されています。まずは同梱のセットファイルを読み込んで稼働させてみてください。</li>
+                <li><strong>【安全重視の方】：</strong><br><code>UseFailsafeSL</code> を true に変更し、万が一の相場急変時に資金の大部分を守る設定（デフォルトは資金の10%でカット）にすることをお勧めします。</li>
+                <li><strong>【トレンド特化の方】：</strong><br>「今は完全な上昇トレンドだ」と判断できる場合は、<code>TradeDirection</code> を買いのみ（または売りのみ）に設定し、逆張りのリスクをゼロにして稼働させる使い方も非常に強力です。</li>
+            </ul>
+
+            <div class="alert-box" style="margin-top: 40px;">
+                <h4 class="alert-title">【免責事項および注意事項】</h4>
+                <p>当システムは過去のデータに基づき検証されたロジックを搭載しておりますが、FX取引には元本割れや証拠金以上の損失を被るリスクが伴います。最終的なロット数や稼働・停止の判断は、自己責任において行ってください。お客様の環境不具合等に伴ういかなる損失についても、開発元および配布元は一切の責任を負いかねます。</p>
+            </div>
         </div>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 VALHALLA All Rights Reserved.</p>
+        <p>&copy; 2026 VALLHALA All Rights Reserved.</p>
     </footer>
 
 </body>

@@ -6,16 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AEGIS Pro 完全解説＆導入マニュアル | VALLHALA</title>
     <style>
-        /* ====================================
-           基本設定・ヘッダー・フッター
-           ==================================== */
+        /* 基本設定 */
         body { background-color: #050b14; color: #cbd5e1; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; line-height: 1.8; }
         header { background-color: #020408; padding: 20px 50px; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid #1e293b; position: sticky; top: 0; z-index: 1000;}
         .logo { font-size: 28px; font-weight: bold; color: #d4af37; letter-spacing: 3px; }
-        
-        /* ====================================
-           マニュアル本体のデザイン
-           ==================================== */
         .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
 
         /* タイトルエリア */
@@ -24,40 +18,39 @@
         .page-header h1 { font-size: 34px; margin-bottom: 20px; letter-spacing: 2px; color: #ffffff; line-height: 1.4;}
         .page-header p { color: #94a3b8; font-size: 16px; margin: 0 auto; max-width: 750px; text-align: left; }
 
-        /* 各章（チャプター）のデザイン */
+        /* 目次 (TOC) */
+        .toc { background-color: #0a1128; border: 1px solid #1e293b; border-left: 4px solid #3b82f6; padding: 25px; border-radius: 8px; margin-bottom: 50px; }
+        .toc h3 { color: #ffffff; margin-top: 0; margin-bottom: 15px; font-size: 18px; }
+        .toc ul { list-style: none; padding: 0; margin: 0; }
+        .toc li { margin-bottom: 10px; }
+        .toc a { color: #94a3b8; text-decoration: none; transition: 0.2s; display: block; padding: 5px 0;}
+        .toc a:hover { color: #3b82f6; padding-left: 5px;}
+
+        /* 各章デザイン */
         .chapter { background-color: #0a1128; border: 1px solid #1e293b; border-radius: 12px; padding: 40px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
         .chapter-title { color: #3b82f6; font-size: 24px; font-weight: bold; margin-top: 0; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid #1e293b; display: flex; align-items: center; gap: 15px;}
         .chapter-title span { background-color: #3b82f6; color: #ffffff; padding: 2px 12px; border-radius: 4px; font-size: 16px; font-weight: bold;}
 
-        /* 見出しとテキスト */
+        /* 見出し・テキスト */
         h3 { color: #ffffff; font-size: 20px; margin-top: 40px; margin-bottom: 20px; border-left: 4px solid #d4af37; padding-left: 15px; }
         h4 { color: #3b82f6; font-size: 18px; margin-top: 30px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;}
         p { color: #cbd5e1; font-size: 15px; margin-bottom: 20px; }
-        strong { color: #ffffff; font-weight: bold; background: linear-gradient(transparent 70%, rgba(59, 130, 246, 0.3) 0%); }
-
-        /* リストデザイン */
         ul { padding-left: 20px; margin-bottom: 25px; color: #cbd5e1; }
         li { margin-bottom: 10px; }
+        strong { color: #ffffff; font-weight: bold; background: linear-gradient(transparent 70%, rgba(59, 130, 246, 0.3) 0%); }
 
-        /* ====================================
-           アコーディオンメニュー (スッキリ見せる)
-           ==================================== */
-        details { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 8px; margin-bottom: 15px; transition: 0.3s; }
-        details:hover { border-color: #3b82f6; }
-        summary { padding: 20px; font-size: 18px; font-weight: bold; color: #3b82f6; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; outline: none;}
-        summary::-webkit-details-marker { display: none; }
-        summary::after { content: '＋'; color: #d4af37; font-size: 20px; transition: 0.3s;}
-        details[open] summary::after { content: '－'; transform: rotate(180deg);}
-        details[open] summary { border-bottom: 1px solid #1e293b; margin-bottom: 15px; }
-        .details-content { padding: 0 20px 20px 20px; color: #cbd5e1; font-size: 15px; }
-        .details-content ol { padding-left: 20px; margin-bottom: 0; }
-        .details-content ol li { margin-bottom: 15px; }
-
-        /* パラメーター解説の表（テーブル） */
+        /* テーブル（パラメーター） */
         table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: #0f172a; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.3);}
         th, td { padding: 15px; border: 1px solid #1e293b; text-align: left; font-size: 14px; }
         th { background-color: #1e293b; color: #d4af37; font-weight: bold; width: 35%; }
         td { color: #cbd5e1; }
+
+        /* ステップボックス */
+        .step-box { background-color: #050b14; border-left: 4px solid #3b82f6; padding: 25px; border-radius: 0 8px 8px 0; margin-bottom: 25px; border-top: 1px solid #1e293b; border-right: 1px solid #1e293b; border-bottom: 1px solid #1e293b;}
+        .step-title { color: #3b82f6; font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 15px; }
+        .step-box p:last-child { margin-bottom: 0; }
+        .step-box ol { padding-left: 20px; color: #cbd5e1; margin-bottom: 0;}
+        .step-box ol li { margin-bottom: 10px; }
 
         /* 警告・重要ボックス */
         .alert-box { background-color: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 8px; padding: 25px; margin: 30px 0; }
@@ -69,11 +62,9 @@
         .ui-box h5 { color: #ffffff; font-size: 16px; margin: 0 0 10px 0; }
         .ui-box p { margin: 0; font-size: 14px; color: #94a3b8;}
 
-        /* スマホ対応 */
         @media (max-width: 768px) {
             .chapter { padding: 25px 15px; }
             .page-header h1 { font-size: 26px; }
-            summary { font-size: 16px; padding: 15px; }
             th, td { padding: 10px; font-size: 13px; display: block; width: 100%; box-sizing: border-box; }
             th { border-bottom: none; }
         }
@@ -89,19 +80,29 @@
         
         <div class="page-header">
             <span class="product-badge">POSITION MANAGEMENT SYSTEM</span>
-            <h1>🛡️ AEGIS Pro<br>完全解析 ＆ プロモーション資料</h1>
-            <p>AEGIS（イージス）は、裁量トレードや他のサインツールによる「エントリー」を、プロのトレーダーに代わって<strong>「最も有利なポイントで決済する」</strong>ことに特化した管理システムです。本マニュアルにて、利益を極限まで伸ばし、ピンチからの生還と利益の最大化を追求する機能の全貌をご確認ください。</p>
+            <h1>🛡️ AEGIS Pro<br>完全解説 ＆ 導入マニュアル</h1>
+            <p>AEGIS（イージス）は、裁量トレードや他のサインツールによる「エントリー」を、プロのトレーダーに代わって<strong>「最も有利なポイントで決済する」</strong>ことに特化した管理システムです。利益の最大化とピンチからの生還を追求する機能の全貌をご確認ください。</p>
         </div>
 
-       <div class="chapter">
-            <h2 class="chapter-title"><span>第1章</span> AEGISのロジックと圧倒的な強み</h2>
+        <div class="toc">
+            <h3>📑 目次</h3>
+            <ul>
+                <li><a href="#ch1">▶ 第1章：ロジックと搭載機能（特徴と強み）</a></li>
+                <li><a href="#ch2">▶ 第2章：導入・稼働マニュアル（チャートへの適用）</a></li>
+                <li><a href="#ch3">▶ 第3章：パラメーター完全解説</a></li>
+                <li><a href="#ch4">▶ 第4章：推奨運用ルールと注意点</a></li>
+            </ul>
+        </div>
+
+       <div id="ch1" class="chapter">
+            <h2 class="chapter-title"><span>第1章</span> ロジックと搭載機能（特徴と強み）</h2>
             
             <h3>📈 1. 単体ポジションの利益最大化（トレンド追従）</h3>
             <p>固定pipsでの利確ではなく、「移動平均線（MA）」を基準にしたトレーリングストップを採用。ノイズ（一時的な逆行）で狩られるのを防ぎ、トレンドの波を頭から尻尾まで根こそぎ捉えます。</p>
 
             <h3>💥 2. 複数ポジションの救済と利益最大化（バスケット決済）</h3>
             <p>相場が逆行した際は、固定幅ではなく「徐々に間隔を広げる（変則ナンピン）」ことで、口座資金の急激なドローダウン（含み損の拡大）リスクを軽減します。<br>
-            ナンピンでロットが膨らんだ際は、設定した「口座残高の○％」という目標金額を、<strong>合計ロット数に合わせて自動でスケールアップ（拡大）</strong>させます。これにより、「せっかくナンピンしたのに微益で終わる」というEA特有の弱点を克服し、ピンチからの生還時、利益の最大化を追求します。</p>
+            ナンピンでロットが膨らんだ際は、設定した「口座残高の○％」という目標金額を、<strong>合計ロット数に合わせて自動でスケールアップ（拡大）</strong>させます。これにより、ピンチからの生還時にも利益の最大化を追求します。</p>
 
             <h3>🛡️ 3. 鉄壁のリスク管理（緊急停止＆指標回避）</h3>
             <p>許容ドローダウン（%）を超えた際の強制全決済機能に加え、<strong>経済指標の発表時間を察知し、含み損益が許容範囲内であれば自動で逃げる（全決済する）</strong>という高度な防衛機能を搭載しています。</p>
@@ -113,43 +114,37 @@
             <p>チャート上に「本日の確定利益」や「次に決済される目標金額」をリアルタイム表示。さらに、緊急時にワンクリックで決済できるUIボタンを搭載しており、すべてが視覚的に完結します。</p>
         </div>
 
-        <div class="chapter">
+        <div id="ch2" class="chapter">
             <h2 class="chapter-title"><span>第2章</span> 導入・稼働マニュアル</h2>
-            <p>AEGISをMT4にセットアップし、安全に稼働させるための手順です。項目をクリックして詳細を確認してください。</p>
+            
+            <div style="background-color: #0f172a; border: 1px solid #3b82f6; border-left: 5px solid #3b82f6; padding: 25px; border-radius: 8px; margin-bottom: 30px;">
+                <h4 style="color: #3b82f6; margin-top: 0; margin-bottom: 15px; font-size: 18px; border: none; padding: 0;">⚠️ 必ずお読みください：共通の初期設定について</h4>
+                <p style="color: #cbd5e1; margin-bottom: 20px;">初めて稼働させる方は、システムをチャートに入れる前に<strong>「VPSの準備」「MT4の通信許可（DLL・Webリクエスト）」「通知設定」「ファイルの配置」</strong>を行う必要があります。<br>
+                まだ設定が完了していない方は、必ず以下の共通マニュアルを先に完了させてください。</p>
+                <a href="manual-setup.html" target="_blank" style="display: inline-block; background-color: #3b82f6; color: #ffffff; padding: 12px 25px; text-decoration: none; font-weight: bold; border-radius: 50px; transition: 0.3s; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);">
+                    ➡ 【全システム共通】導入・初期設定マニュアルを見る
+                </a>
+            </div>
 
-            <details>
-                <summary>Step 1： 導入準備（ファイルの配置と通信許可）</summary>
-                <div class="details-content">
-                    <ol>
-                        <li><strong>ファイルの配置:</strong> ダウンロードした <code>AEGIS_MR_Pro_X_Full.ex4</code> ファイルをコピーし、MT4のメニューから「ファイル」＞「データフォルダを開く」＞「MQL4」＞「Experts」フォルダ内に貼り付けます。</li>
-                        <li><strong>MT4の再起動:</strong> MT4を再起動、またはナビゲーターウィンドウの「エキスパートアドバイザ」の上で右クリックし「更新」を押します。</li>
-                        <li><strong>Webリクエストの許可:</strong> MT4上部のメニューから「ツール」＞「オプション」＞「エキスパートアドバイザ」を開きます。「WebRequestを許可するURLリスト」にチェックを入れ、以下のURLを追加します。<br>
-                        <span style="color: #3b82f6;">https://discord.com</span> （Discord通知用）<br>
-                        <span style="color: #3b82f6;">https://script.google.com</span> （認証システム用）
-                        </li>
-                    </ol>
-                </div>
-            </details>
+            <div class="step-box">
+                <h3 class="step-title">STEP 1：チャートへの適用と設定</h3>
+                <p style="color: #9ca3af; font-size: 13px; margin-bottom: 15px;">※共通の初期設定が完了していることを前提とした手順です。</p>
+                <ol>
+                    <li>稼働させたい（管理させたい）通貨ペアのチャートを開きます。</li>
+                    <li>ナビゲーターから「AEGIS_MR_Pro_X_Full」をチャートへドラッグ＆ドロップします。</li>
+                    <li>設定画面の「全般」タブで<strong>「自動売買を許可する」「DLLの使用を許可する」</strong>にチェックを入れます。</li>
+                    <li>「パラメーターの入力」タブを開き、ご自身の運用や口座残高に合わせた数値を設定して「OK」を押します。（※同梱のセットファイルがある場合は読み込んでください）</li>
+                </ol>
+            </div>
 
-            <details>
-                <summary>Step 2： 稼働手順（チャートへの適用）</summary>
-                <div class="details-content">
-                    <ol>
-                        <li><strong>自動売買の許可:</strong> MT4上部の「自動売買」ボタンを押し、緑色（ON）にします。</li>
-                        <li><strong>チャートへのドラッグ:</strong> 稼働させたい通貨ペアのチャートを開き、ナビゲーターから「AEGIS_MR_Pro_X_Full」をチャートへドラッグ＆ドロップします。</li>
-                        <li><strong>DLLの使用許可:</strong> 表示された設定画面の「全般」タブで、以下の2つに必ずチェックを入れてください。<br>
-                        ☑️ 自動売買を許可する<br>
-                        ☑️ DLLの使用を許可する
-                        </li>
-                        <li><strong>パラメータの設定:</strong> 「パラメーターの入力」タブで、ご自身の運用に合わせた数値を設定します。（※詳細は第3章参照）</li>
-                        <li><strong>稼働確認:</strong> 右上のニコちゃんマークがニッコリ微笑み、スマホやDiscordに「【起動テスト】正常に稼働開始しました」と通知が来れば、準備完了です！</li>
-                    </ol>
-                </div>
-            </details>
+            <div class="step-box" style="border-left-color: #10b981; margin-bottom: 0;">
+                <h3 class="step-title" style="color: #10b981;">STEP 2：稼働確認</h3>
+                <p style="margin-bottom: 0;">チャート右上のニコちゃんマークが微笑み、スマホやDiscordに「【起動テスト】正常に稼働開始しました」と通知が来れば、準備完了です！</p>
+            </div>
         </div>
 
-        <div class="chapter">
-            <h2 class="chapter-title"><span>第3章</span> 主要パラメータと使い方</h2>
+        <div id="ch3" class="chapter">
+            <h2 class="chapter-title"><span>第3章</span> パラメーター完全解説</h2>
             <p>設定画面（パラメーターの入力タブ）で変更できる、AEGISの核となる設定項目です。</p>
 
             <h4>■ 【トレーリング設定（単体保有時）】</h4>
@@ -169,10 +164,16 @@
                 <tr><th>NewsTime</th><td>重要な指標発表の時間を<strong>パソコンの時計基準</strong>で入力します。（例: 21:30）</td></tr>
                 <tr><th>MaxLossForNews</th><td>指標前に強制決済を許容する「最大含み損（金額）」です。これよりマイナスが大きい場合は、勝手に決済せずにホールド（耐える）します。（例: -500）</td></tr>
             </table>
+            
+            <h4>■ 【通知設定】</h4>
+            <table>
+                <tr><th>UsePushNotify</th><td>trueにするとスマホのMT4アプリへプッシュ通知を送ります。（※設定手順は共通マニュアル参照）</td></tr>
+                <tr><th>UseDiscord / DiscordWebHook</th><td>Discordの指定チャンネルへ画像付きの取引通知を送るための設定です。（※設定手順は共通マニュアル参照）</td></tr>
+            </table>
 
             <div class="alert-box">
                 <h4 class="alert-title">🖱️ チャート上のUIボタンの使い方</h4>
-                <p>チャート右下（または左下）に表示されるボタンで、緊急時の手動操作が直感的に行えます。</p>
+                <p>チャートに表示されるボタンで、緊急時の手動操作が直感的に行えます。</p>
                 
                 <div style="margin-top: 20px;">
                     <div class="ui-box">
@@ -185,19 +186,25 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div id="ch4" class="chapter">
+            <h2 class="chapter-title"><span>第4章</span> 推奨運用ルールと注意点</h2>
+            <ul>
+                <li><strong>裁量トレードの補助として：</strong> ご自身でエントリーを行った後、AEGISに決済を任せることで「チキン利食い」を防ぎ、プロレベルのトレイリング決済を実現できます。</li>
+                <li><strong>他のEAの決済専用ツールとして：</strong> エントリーしかしない他のサインツール等と組み合わせることで、強固な出口戦略（エグジット）を追加することができます。※その際、マジックナンバーの競合にご注意ください。</li>
+            </ul>
+
+            <div class="alert-box" style="margin-top: 40px; background-color: #0a1128; border-color: #1e293b;">
+                <h4 class="alert-title" style="color: #94a3b8;">【免責事項および注意事項】</h4>
+                <p style="color: #64748b; font-size: 13px;">当システムは決済補助ツールとして設計されておりますが、FX取引には元本割れや証拠金以上の損失を被るリスクが伴います。最終的な稼働の判断、パラメータの調整等は、自己責任において行ってください。お客様の環境不具合等に伴ういかなる損失についても、開発元および配布元は一切の責任を負いかねます。</p>
+            </div>
         </div>
 
     </div>
 
-    <footer style="padding: 40px 20px; background-color: #020408; border-top: 1px solid #1e293b; margin-top: 60px;">
-        <div style="max-width: 800px; margin: 0 auto; text-align: left; background-color: #0f172a; padding: 20px; border-radius: 6px; border-left: 3px solid #3b82f6; margin-bottom: 30px;">
-            <p style="color: #94a3b8; font-size: 14px; font-weight: bold; margin-top: 0;">【免責事項および投資に関するリスクについて】</p>
-            <p style="color: #64748b; font-size: 12px; margin-bottom: 8px;">※本マニュアルで解説しているパラメーター設定や運用ルールは、システムの仕様を説明するためのものであり、将来の利益を保証するものではありません。</p>
-            <p style="color: #64748b; font-size: 12px; margin-bottom: 8px;">※FX取引には元本割れや証拠金以上の損失を被るリスクが伴います。最終的な稼働の判断、パラメータの調整等は、お客様ご自身の資金状況と許容リスクに基づき、自己責任において行ってください。</p>
-            <p style="color: #64748b; font-size: 12px; margin-bottom: 0;">※お客様のPC環境、VPSの不具合、通信エラー、証券会社側のシステム障害等に起因する稼働停止や、それに伴ういかなる損失についても、開発元および当方は一切の責任を負いかねます。</p>
-        </div>
-        <p style="text-align: center; color: #475569; font-size: 12px; margin: 0;">&copy; 2026 VALLHALA All Rights Reserved.</p>
+    <footer>
+        <p>&copy; 2026 VALLHALA All Rights Reserved.</p>
     </footer>
 
 </body>
