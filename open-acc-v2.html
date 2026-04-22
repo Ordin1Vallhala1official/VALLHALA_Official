@@ -32,9 +32,6 @@
         .broker-banner { width: 100%; background-color: #1a233a; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid #1f2937; }
         .broker-banner img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
         
-        /* バナーを持っていない時用のプレースホルダー（画像を入れたら消してください） */
-        .banner-placeholder { padding: 80px 20px; color: #6b7280; font-size: 18px; text-align: center; border-bottom: 1px dashed #374151; width: 100%; box-sizing: border-box;}
-
         .broker-content { padding: 40px; }
         .broker-title { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid #1f2937; padding-bottom: 20px;}
         .broker-title h2 { color: #ffffff; font-size: 28px; margin: 0; }
@@ -54,6 +51,16 @@
         /* CTAボタン */
         .btn-open { display: block; background: linear-gradient(90deg, #d4af37 0%, #fce28b 100%); color: #000000; padding: 20px; font-size: 20px; font-weight: bold; text-decoration: none; border-radius: 50px; text-align: center; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2); }
         .btn-open:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4); }
+
+        /* ★追加：トラッキングエラー警告ボックス */
+        .tracking-alert { background-color: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 25px; margin-top: 30px; }
+        .tracking-alert h4 { color: #ef4444; margin-top: 0; margin-bottom: 15px; font-size: 18px; display: flex; align-items: center; gap: 8px; }
+        .tracking-alert p { color: #fca5a5; font-size: 15px; margin-bottom: 15px; font-weight: bold;}
+        .tracking-alert ul { padding-left: 0; margin: 0; list-style: none; }
+        .tracking-alert li { margin-bottom: 15px; color: #d1d5db; font-size: 14px; line-height: 1.6; padding-left: 20px; position: relative;}
+        .tracking-alert li::before { content: "⚠️"; position: absolute; left: 0; top: 0; font-size: 14px; }
+        .tracking-alert li:last-child { margin-bottom: 0; }
+        .tracking-alert li strong { color: #ef4444; display: block; font-size: 15px; margin-bottom: 3px;}
 
         /* 次のステップ案内 */
         .next-step-section { background-color: #111827; border: 2px solid #3b82f6; border-radius: 12px; padding: 40px; margin-top: 60px; margin-bottom: 60px; text-align: center; }
@@ -118,6 +125,16 @@
                 <a href="https://affx.click/bWnc8" class="btn-open" target="_blank" rel="noopener noreferrer">
                     XMTradingで口座を開設する
                 </a>
+
+                <div class="tracking-alert">
+                    <h4>【超重要】紐付けエラーを防ぐための注意点</h4>
+                    <p>当グループの無料EAは、専用リンクからの開設（IB紐付け）が必須となります。以下の点に必ずご注意ください。</p>
+                    <ul>
+                        <li><strong>広告ブロックをオフにする</strong>ブラウザのセキュリティ設定（Braveブラウザなど）や、AdBlockなどの拡張機能がオンになっていると、正しくリンクが反映されません。必ず一時的にオフにするか、別のブラウザ（ChromeやSafari）で開いてください。</li>
+                        <li><strong>寄り道をせずに開設を完了させる</strong>リンクを踏んだ後、別のサイトを見に行ったり、途中で長時間放置するとリンク（Cookie）が切れてしまいます。ページを開いたら、そのまま一気に開設完了まで進めてください。</li>
+                    </ul>
+                </div>
+
             </div>
         </div>
 
@@ -154,12 +171,22 @@
                 <a href="https://www.hfm.com/sv/jp/?refid=30517920" class="btn-open" target="_blank" rel="noopener noreferrer">
                     HFMで口座を開設する
                 </a>
+
+                <div class="tracking-alert">
+                    <h4>【超重要】紐付けエラーを防ぐための注意点</h4>
+                    <p>当グループの無料EAは、専用リンクからの開設（IB紐付け）が必須となります。以下の点に必ずご注意ください。</p>
+                    <ul>
+                        <li><strong>広告ブロックをオフにする</strong>ブラウザのセキュリティ設定（Braveブラウザなど）や、AdBlockなどの拡張機能がオンになっていると、正しくリンクが反映されません。必ず一時的にオフにするか、別のブラウザ（ChromeやSafari）で開いてください。</li>
+                        <li><strong>寄り道をせずに開設を完了させる</strong>リンクを踏んだ後、別のサイトを見に行ったり、途中で長時間放置するとリンク（Cookie）が切れてしまいます。ページを開いたら、そのまま一気に開設完了まで進めてください。</li>
+                    </ul>
+                </div>
+
             </div>
         </div>
 
         <div class="next-step-section fade-in">
             <h3>口座開設が完了した方へ</h3>
-            <p>開設が完了しましたら、証券会社から発行された<strong>【MT4の口座番号（ログインID）】</strong>を、VALHALLAの公式LINEまでメッセージでお送りください。<br><br>API認証（口座の紐付け）が確認でき次第、<strong>システムのダウンロードURLと解凍パスワード</strong>を自動でお渡しいたします。</p>
+            <p>開設が完了しましたら、証券会社から発行された<strong>【MT4の口座番号（ログインID）】</strong><strong>【使用したいシステム名】</strong>を、VALHALLAの公式LINEまでメッセージでお送りください。<br><br>API認証（口座の紐付け）が確認でき次第、<strong>システムのダウンロードURLと解凍パスワード</strong>をお渡しいたします。</p>
             
             <a href="https://lin.ee/lOi6rtH" class="btn-line">
                 💬 公式LINEへ口座番号を送る
